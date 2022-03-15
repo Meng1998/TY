@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>人员信息</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome,ztree"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" lay-filter="LAY-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-block">
+                        <input name="id" style="display: none;">
+                        <input name="user_name" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">真实姓名</label>
+                    <div class="layui-input-block">
+                        <input name="full_name" autocomplete="off" placeholder="请输入真实姓名" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">部门角色</label>
+                    <div class="layui-input-block">
+                        <input id="dept_tree" lay-filter="LAY-tree-dept" autocomplete="off" placeholder="请选择部门角色"
+                            readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属部门</label>
+                    <div class="layui-input-block">
+                        <input name="dept_id" style="display: none;">
+                        <input name="dept_name" autocomplete="off" placeholder="请选择所属部门" readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属角色</label>
+                    <div class="layui-input-block">
+                        <input name="role_id" style="display: none;">
+                        <input name="role_name" autocomplete="off" placeholder="请选择所属角色" readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联系电话</label>
+                    <div class="layui-input-block">
+                        <input name="user_tel" autocomplete="off" placeholder="请输入联系电话" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">入职时间</label>
+                    <div class="layui-input-block">
+                        <input name="entry_time" autocomplete="off" placeholder="请输入入职时间" readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">薪资</label>
+                    <div class="layui-input-block">
+                        <input verify="number" name="wages" autocomplete="off" placeholder="请输入薪资" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开户行</label>
+                    <div class="layui-input-block">
+                        <input name="bank" autocomplete="off" placeholder="请输入开户行" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">银行卡号</label>
+                    <div class="layui-input-block">
+                        <input name="bankcard" autocomplete="off" placeholder="请输入银行卡号" class="layui-input">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+//不被选中
+@mixin notSelect() {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+// 滚动条
+@mixin scrollbar($width) {
+    &::-webkit-scrollbar{width:$width;height:5px;border-radius: 5px;}
+    &::-webkit-scrollbar-track{background-color: transparent;border-radius: 5px;height: 260px;}
+    &::-webkit-scrollbar-thumb{background: $theme-color;border-radius: 5px;}
+    &::-webkit-scrollbar-thumb:hover{background: $theme-color;}
+}
+@mixin scrollbar2($height) {
+    &::-webkit-scrollbar{width:5px;height:$height;border-radius: 5px;}
+    &::-webkit-scrollbar-track{background-color: transparent;border-radius: 5px;height: 260px;}
+    &::-webkit-scrollbar-thumb{background: $theme-color;border-radius: 5px;}
+    &::-webkit-scrollbar-thumb:hover{background: $theme-color;}
+}

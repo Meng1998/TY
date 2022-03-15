@@ -1,0 +1,98 @@
+﻿<Window x:Class="MVVM_DL.XX"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:winf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:ctrl="clr-namespace:WPF_DateTimePicker.UserControls.DateTimePicker.View;assembly=WPF_DateTimePicker.UserControls"
+        xmlns:my="clr-namespace:MVVM_DL.Style"
+        xmlns:local="clr-namespace:MVVM_DL"
+        mc:Ignorable="d"
+        Title="XX" Height="450"  Width="800" Style="{StaticResource BaseWindowStyle}">
+    <!--{ StaticResource CustomWindowChrome}-->
+    <!--BaseWindowStyle-->
+    <!--<Window.Background>
+        <SolidColorBrush Opacity="0.5" Color="White" />
+    </Window.Background>-->
+
+    <Grid>
+        
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" MouseLeftButtonDown="CustomWindow_MouseLeftButtonDown">
+            <Border x:Name = "borderTitle"   MouseLeftButtonDown="CustomWindow_MouseLeftButtonDown">
+                <Grid Background = "Transparent" >
+                    <Image Source="Images\img\play.png" Margin="12,0,0,0"  HorizontalAlignment="Left" />
+                    <StackPanel   HorizontalAlignment="Left" Margin="-10,0,0,0"  >
+                        <materialDesign:PopupBox Foreground="White"  >
+                            <StackPanel Width="200" Background="Gray"  Opacity="0.8"  Margin="5,0,0,10"  >
+                                <Button Content="账号"/>
+                                <Button Content="设置"/>
+                                <Button Content="帮助"/>
+                                <Separator/>
+                                <DockPanel >
+                                <ctrl:DateTimePicker BorderBrush="Gray" Height="35" Width="150" Margin="10,0,0,0" x:Name="timeone"></ctrl:DateTimePicker>
+                                <Button x:Name="button1" Content="获取时间" Margin="10,0,0,0"/>
+                                </DockPanel >
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            
+        </Grid>
+        <Grid Grid.Row="1">
+            <!--<my:UserControl1 HorizontalAlignment="Left" Margin="38,46,0,0" x:Name="userControl11" VerticalAlignment="Top" Height="183" Width="215"></my:UserControl1>-->
+            <!--<Button x:Name="xxa" Content="LLLLLLSDDS" Background="Gray" ></Button>-->
+
+            <!--<WindowsFormsHost x:Name="formhost1" Grid.Row="0" Grid.Column="0" Opacity="1" >
+                <winf:PictureBox x:Name="userCtrl1" Dock="Fill" BackColor="yellow"  ></winf:PictureBox>
+            </WindowsFormsHost>-->
+                <!--<Grid.RowDefinitions>
+
+                    <RowDefinition Height="{Binding OneRowgrid}" />
+                    <RowDefinition Height="{Binding TwoRowgrid}" />
+                    <RowDefinition Height="{Binding ThreeRowgrid}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding OneColumngrid}"/>
+                    <ColumnDefinition Width="{Binding TwoColumngrid}" />
+                    <ColumnDefinition Width="{Binding ThreeColumngrid}" />
+                </Grid.ColumnDefinitions>
+
+            <WindowsFormsHost x:Name="formhost1" Grid.Row="0" Grid.Column="0" Opacity="1" >
+                <winf:PictureBox x:Name="userCtrl1" Dock="Fill" BackColor="#FF7B7F80"  ></winf:PictureBox>
+                </WindowsFormsHost>
+                <WindowsFormsHost x:Name="formhost2" Grid.Row="0" Grid.Column="1" >
+                    <winf:PictureBox x:Name="userCtrl2" Dock="Fill" BackColor="#FF7B7F80"   ></winf:PictureBox>
+                </WindowsFormsHost>
+            <WindowsFormsHost x:Name="formhost3" Grid.Row="0" Grid.Column="2" >
+                    <winf:PictureBox x:Name="userCtrl3" Dock="Fill" BackColor="#FF7B7F80"  ></winf:PictureBox>
+                </WindowsFormsHost>
+
+                <WindowsFormsHost x:Name="formhost4" Grid.Row="1" Grid.Column="0"  >
+                    <winf:PictureBox x:Name="userCtrl4" Dock="Fill" BackColor="#FF7B7F80"  ></winf:PictureBox>
+                </WindowsFormsHost>
+                <WindowsFormsHost x:Name="formhost5" Grid.Row="1" Grid.Column="1" >
+                    <winf:PictureBox x:Name="userCtrl5" Dock="Fill" BackColor="#FF7B7F80" ></winf:PictureBox>
+                </WindowsFormsHost>
+                <WindowsFormsHost x:Name="formhost6" Grid.Row="1" Grid.Column="2" >
+                    <winf:PictureBox x:Name="userCtrl6" Dock="Fill" BackColor="#FF7B7F80" ></winf:PictureBox>
+                </WindowsFormsHost>
+
+                <WindowsFormsHost x:Name="formhost7"  Grid.Row="2" Grid.Column="0" >
+                    <winf:PictureBox x:Name="userCtrl7" Dock="Fill" BackColor="#FF7B7F80" ></winf:PictureBox>
+                </WindowsFormsHost>
+                <WindowsFormsHost x:Name="formhost8" Grid.Row="2" Grid.Column="1" >
+                    <winf:PictureBox x:Name="userCtrl8" Dock="Fill" BackColor="#FF7B7F80" ></winf:PictureBox>
+                </WindowsFormsHost>
+                <WindowsFormsHost x:Name="formhost9" Grid.Row="2" Grid.Column="2" >
+                    <winf:PictureBox x:Name="userCtrl9" Dock="Fill" BackColor="#FF7B7F80" ></winf:PictureBox>
+                </WindowsFormsHost>-->
+        </Grid>
+    </Grid>
+
+</Window>

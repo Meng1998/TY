@@ -1,0 +1,65 @@
+.Header{
+    position: fixed;
+    top:0px;
+    left: 0px;
+    width: 100%;
+    z-index: 2;
+    height: 110px;
+    background: url("../../assets/images/header/bj.png") no-repeat top;
+
+    .Header-left{
+        display: flex;
+         li{
+            margin: 33px 12px 0px 10px;
+        }
+         li:nth-child(1){
+            margin: 20px 12px 0px 10px;
+            width: 110px;
+            color: grey;
+            span {
+                display: block;
+                font-size: 12px;
+            }
+            span:nth-child(1) {
+                font-size: 25px;
+                font-weight: 600;
+            }
+        }
+        .Titletxt{
+            position: absolute;
+            left: 818px;
+            top: -19px;
+            font-size: 34px;
+            color: white;
+        }
+        .Mainbtn img{
+            margin: -10px 0px 0px 10px;
+        }
+         
+        .Header-left-img {
+            display: flex;
+            justify-content: left;
+            color: grey;
+        }
+        .Header-left-img img{
+            width: 44px;
+            height: 44px;
+            margin:-10px 5px 0px 0px;
+        }
+        .Header-lfte-text{
+            color: white;
+        }
+        .Header-left-img span{
+        margin-top: -2px;
+        font-size: 17px;
+        font-weight: 600;
+        cursor:default;
+        }
+        .Header-left-img:nth-child(6){
+            margin-left: 574px;
+        }
+    }
+     
+    
+}
+

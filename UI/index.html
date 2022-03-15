@@ -1,0 +1,2342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/index.css" />
+    <!-- <script  src="./js/echarts.js"></script> -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="./js/Api.js"></script>
+    <script src="./js/loading.js"></script>
+
+    <script src="./js/video.js"></script>
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/jsencrypt.min.js"></script>
+    <script src="./js/jsWebControl-1.0.0.min.js"></script>
+
+    <!-- <script src="https://github.com/calvinmetcalf/shapefile-js"></script> -->
+
+    <script src="./js/dist/Shapefile.js"></script>
+    <script type="text/javascript" src="./js/mapvision3d.min.js"></script>
+
+</head>
+
+<body oncontextmenu="doNothing()">
+    <div style="position: fixed;left: 10px;top:10px;z-index: 300">
+        <button onclick="Flyposiyion()">点击</button>
+    </div>
+    <div id="mapvision3d"></div>
+    <div class="title">
+        <h1>南山陵园中心控制平台</h1>
+        <div class="title-time">
+            <span>14:30:02</span>
+            <div class="title-time1">
+                <p class="week">星期一</p>
+                <p class="time1">2021-8-19</p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="leftmain">
+        <div class="leftm">
+            <div class="leftm-top">
+                <p class="tit-tt">
+                    <i></i><span>墓穴统计</span><label>TOMB STATISTICS</label>
+                </p>
+                <div class="m-top-totle">
+                    总数
+                </div>
+                <ul>
+                    <div class="spinner"></div>
+                </ul>
+            </div>
+            <div class="leftm-bottom">
+                <p class="tit-tt">
+                    <i></i><span>线路导航</span><label>ROUTE NAVIGATION</label>
+                </p>
+                <p>
+                    <span class="TxtSs" onclick="Setroute()"></span><input class="Txt-mes" type="text" value=""
+                        placeholder="搜索" />
+                </p>
+                <ul class="dh-lx">
+                    <div class="spinner"></div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="rightmain">
+        <div class="rightm">
+            <div class="rightm-top">
+                <p class="tit-tt">
+                    <i></i><span>设备分布</span><label>EQUIPMENT DISTRIBUTION</label>
+                </p>
+                <ul class="ent-sbfb">
+                    <div class="spinner"></div>
+                </ul>
+            </div>
+
+            <!-- 客流/车辆统计 -->
+            <div class="rightm-content">
+                <p class="tit-tt">
+                    <i></i><span>客流/车辆统计</span><label>ALARM STATISTICS</label>
+                </p>
+
+                <!-- tab切换  -->
+                <div class="rightm-switch">
+                    <div class="switch-top">
+                        <span class="active_attrc"></span>
+                        <span></span>
+                    </div>
+                    <div class="switch-content">
+                        <div class="content-tab selected" id="chartmain"
+                            style="width: 251px; height: 174px; margin-top: 5%"></div>
+                        <div class="content-tab" id="chartmain1" style="width: 251px; height: 174px; margin-top: 5%">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 名人墓穴  -->
+            <div class="rightm-bottom">
+                <p class="tit-tt">
+                    <i></i><span>名人墓</span><label>CELEBRITY TOMB</label>
+                </p>
+
+                <!-- tab切换  -->
+                <div class="mr-switch">
+                    <div class="switch-frame">
+                        <span>文化名人</span>
+                        <span>南山英魂</span>
+                    </div>
+
+                    <!-- 切换显示文化名人和南山英魂的内容 -->
+                    <div class="switch-fcontent">
+
+                        <ul class="mr-tol selected1">
+                            <div class="spinner"></div>
+                        </ul>
+
+                        <ul class="mr-tol1">
+                            <div class="spinner"></div>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="right-CJ">
+        <span onclick="reset()"></span>
+        <span onclick="closet()"></span>
+        <span onclick="RefreshUemap()"></span>
+    </div>
+    <div class="ifrm-tc" style="display: none"></div>
+    <div class="ifrm-tc-devic" style="display: none;z-index:2">
+        <div class="spinner"></div>
+    </div>
+    <!-- 墓区的框 -->
+    <div class="cemetery" style="display: none;"></div>
+    <div class="bottom"></div>
+
+    <div id="videoKongz" class="videoKongz" style="top: 120px; left: 500px; display: none">
+        <!-- <span onclick="huifang()">回放</span> -->
+        <span onclick="videoDisplay()">X</span>
+    </div>
+    <div id="playWnd" class="playWnd1" style="top: 150px; left: 500px"></div>
+
+    <script>
+        $(function () {
+            //柱状
+            let xData = ["10/14", "10/15", "10/16", "10/17", "10/18", "10/19", "10/20"];
+            let xData1 = ["10/14", "10/15", "10/16", "10/17", "10/18", "10/19", "10/20"];
+            let line = ["100", "150", "160", "120", "130", "120", "140"];
+            let line1 = ["10", "30", "50", "70", "90", "30", "50"];
+            let line2 = ["100", "150", "160", "120", "130", "120", "140"];
+            let line3 = ["20", "40", "60", "80", "100", "20", "40"];
+            let option = {
+                grid: {
+                    left: "15%",
+                    top: "14%",
+                    right: "5%",
+                    bottom: "18%",
+                },
+                legend: {
+                    show: true,
+                    // icon: "circle",
+                    // orient: "horizontal",
+                    right: "0%",
+                    itemWidth: 15,
+                    itemHeight: 10,
+                    // itemGap: 30,
+                    textStyle: {
+                        // color: '#FFFFFF'
+                        color: "#C9C8CD",
+                        fontSize: 12,
+                    },
+                },
+                xAxis: [
+                    {
+                        data: xData,
+
+                        axisLabel: {
+                            textStyle: {
+                                color: "white",
+                                fontSize: 10,
+                            },
+                            rotate: 30,
+                            margin: 5, //刻度标签与轴线之间的距离。
+                        },
+
+                        axisLine: {
+                            show: true, //不显示x轴
+                            lineStyle: {
+                                color: " #6d7475",
+                            },
+                        },
+                        axisTick: {
+                            show: false, //不显示刻度
+                        },
+                        boundaryGap: true,
+                        splitLine: {
+                            show: false,
+                            width: 0.8,
+                            lineStyle: {
+                                type: "solid",
+                                color: "#03202E",
+                            },
+                        },
+                    },
+                ],
+                yAxis: [
+                    {
+                        type: "value",
+                        min: 0,
+                        max: 800,
+                        splitLine: {
+                            show: false,
+                            lineStyle: {
+                                color: "white",
+                                type: "solid",
+                            },
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: " #6d7475",
+                            },
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: "white",
+                            },
+                        },
+                    },
+                ],
+                series: [
+                    //柱体
+                    {
+                        name: "客流",
+                        type: "bar",
+                        barWidth: 20,
+                        barGap: "0%",
+                        itemStyle: {
+                            normal: {
+                                color: {
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    type: "linear",
+                                    global: false,
+                                    colorStops: [
+                                        {
+                                            offset: 0,
+                                            color: "#43bafe"
+                                        }
+
+                                    ],
+                                },
+                            },
+                        },
+
+                        data: line,
+                    },
+                    // {
+                    //     name: "西门",
+                    //     type: "bar",
+                    //     barWidth: 10,
+                    //     barGap: "30%",
+                    //     itemStyle: {
+                    //         normal: {
+                    //             color: {
+                    //                 x: 0,
+                    //                 y: 0,
+                    //                 x2: 0,
+                    //                 y2: 1,
+                    //                 type: "linear",
+                    //                 global: false,
+                    //                 colorStops: [
+                    //                     // {
+                    //                     //   //第一节下面
+                    //                     //   offset: 0,
+                    //                     //   color: "rgba(0,255,245,0.5)",
+                    //                     // },
+                    //                     {
+                    //                         offset: 1,
+                    //                         color: "#04be02",
+                    //                     },
+                    //                 ],
+                    //             },
+                    //         },
+                    //     },
+
+                    //     data: line1,
+                    // },
+
+                ],
+
+                tooltip: { // 鼠标悬浮提示框显示 X和Y 轴数据
+                    trigger: 'axis',
+                    backgroundColor: 'rgba(32, 33, 36,.7)',
+                    borderColor: 'rgba(32, 33, 36,0.20)',
+                    borderWidth: 1,
+                    textStyle: { // 文字提示样式
+                        color: '#fff',
+                        fontSize: '15'
+                    },
+                    axisPointer: { // 坐标轴虚线
+                        // type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    },
+                }
+
+            };
+
+            let option1 = {
+
+                grid: {
+                    left: "15%",
+                    top: "14%",
+                    right: "5%",
+                    bottom: "18%",
+                },
+                legend: {
+                    show: true,
+                    // icon: "circle",
+                    // orient: "horizontal",
+                    right: "0%",
+                    itemWidth: 15,
+                    itemHeight: 10,
+                    // itemGap: 30,
+                    textStyle: {
+                        // color: '#FFFFFF'
+                        color: "#C9C8CD",
+                        fontSize: 12,
+                    },
+                },
+                xAxis: [
+                    {
+                        data: xData1,
+
+                        axisLabel: {
+                            textStyle: {
+                                color: "white",
+                                fontSize: 10,
+                            },
+                            rotate: 30,
+                            margin: 5, //刻度标签与轴线之间的距离。
+                        },
+
+                        axisLine: {
+                            show: true, //不显示x轴
+                            lineStyle: {
+                                color: " #6d7475",
+                            },
+                        },
+                        axisTick: {
+                            show: false, //不显示刻度
+                        },
+                        boundaryGap: true,
+                        splitLine: {
+                            show: false,
+                            width: 0.8,
+                            lineStyle: {
+                                type: "solid",
+                                color: "#03202E",
+                            },
+                        },
+                    },
+                ],
+                yAxis: [
+                    {
+                        type: "value",
+                        min: 0,
+                        max: 400,
+                        splitLine: {
+                            show: false,
+                            lineStyle: {
+                                color: "white",
+                                type: "solid",
+                            },
+                        },
+                        axisTick: {
+                            show: false,
+                        },
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: " #6d7475",
+                            },
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: "white",
+                            },
+                        },
+                    },
+                ],
+                series: [
+
+                    //柱体
+                    {
+                        name: "车流",
+                        type: "bar",
+                        barWidth: 20,
+                        barGap: "0%",
+                        itemStyle: {
+                            normal: {
+                                color: {
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    type: "linear",
+                                    global: false,
+                                    colorStops: [
+                                        {
+                                            offset: 0,
+                                            color: "#43bafe"
+                                        }
+
+                                    ],
+                                },
+                            },
+                        },
+
+                        data: line2,
+                    },
+                    // {
+                    //     name: "西门",
+                    //     type: "bar",
+                    //     barWidth: 10,
+                    //     barGap: "30%",
+                    //     itemStyle: {
+                    //         normal: {
+                    //             color: {
+                    //                 x: 0,
+                    //                 y: 0,
+                    //                 x2: 0,
+                    //                 y2: 1,
+                    //                 type: "linear",
+                    //                 global: false,
+                    //                 colorStops: [
+                    //                     // {
+                    //                     //   //第一节下面
+                    //                     //   offset: 0,
+                    //                     //   color: "rgba(0,255,245,0.5)",
+                    //                     // },
+                    //                     {
+                    //                         offset: 1,
+                    //                         color: "#04be02",
+                    //                     },
+                    //                 ],
+                    //             },
+                    //         },
+                    //     },
+
+                    //     data: line3,
+                    // },
+
+                ],
+                tooltip: { // 鼠标悬浮提示框显示 X和Y 轴数据
+                    trigger: 'axis',
+                    backgroundColor: 'rgba(32, 33, 36,.7)',
+                    borderColor: 'rgba(32, 33, 36,0.20)',
+                    borderWidth: 1,
+                    textStyle: { // 文字提示样式
+                        color: '#fff',
+                        fontSize: '15'
+                    },
+                    axisPointer: { // 坐标轴虚线
+                        // type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    },
+                }
+            };
+
+            //切换
+            let myChart = echarts.init(document.getElementById("chartmain"));
+            let myChart1 = echarts.init(document.getElementById("chartmain1"))
+
+            // let myChartsalv = echarts.init(
+            //   document.getElementById("chartmainsalv")
+            // );
+
+            //地图加载完后
+            let start = new Date();
+            InitUE().then(() => {
+                view3d.OverLayerRemoveAll();
+
+                // 所有的覆盖物先隐藏
+                let yinchang1 = yinchang;
+                // console.log(yinchang1);
+                for (let i = 0; i <= yinchang1.length; i++) {
+                    YC(yinchang1[i])
+                }
+                // 加载模型
+                // 请求所有的设备
+
+
+                $.post('http://192.168.0.174:8096/MapW5.5/device/camera/listS', function (data, status) {
+                    console.log(data.data);
+                    let dataArr = data.data;
+                    debugger
+                    let dataArr1 = dataArr.map((item, index) => {
+                        return {
+                            region_id: item.region_id,
+                            category_id: item.category_id,
+                            category_name: item.category_name,
+                            center: item.list_style,
+                            model_name: item.model_name,
+                            device_code: item.device_code,
+                        }
+                    })
+                    console.log(dataArr1);
+                    // // 摄像头
+                    // let dataArr2 = dataArr1.filter(item => {
+                    //     return itme.model_name.indexOf('枪机') > -1;
+                    // })
+                    // let dataArr3 = dataArr1.filter(item => {
+                    //     return itme.model_name.indexOf('杆子') > -1;
+                    // })
+                    //    }) 
+                    // 杆子
+                    let cameraModelSource = Model.createModelSource(dataArr1).map(data => Model.createModelConfig(data))
+                    // let cameraLiganSource = Model.createLiganSource(dataArr1).map(data => Model.createLiganConfig(data))
+                    console.log(cameraModelSource);
+
+                    Model.batchedAddModel(view3d, cameraModelSource, 10, () => {
+                        console.log('all icon add success.')
+                        setInterval("Typedevice()", 1000)
+                    })
+
+
+                });
+
+
+                setInterval('getCoords()', 1000)
+
+            });
+            // Tombdom(MStolel);
+            // Navigdom(Navig);
+            setResolution('mapvision3d', view3d);
+
+            MxTom();
+            Setroute();
+            SetVideo();
+            SetmrTolte();
+            SetmrTolte1();
+            // setTimeout(Typedevice, 1000)
+            // setInterval("Typedevice()", 1000);
+
+            setInterval("time()", 1000);
+
+            // //使用制定的配置项和数据显示图表
+            myChart.setOption(option);
+            myChart1.setOption(option1)
+
+            view3d.UpdateObjectVisibleByPrefix('mingciyuan', true);
+            view3d.FlyToObjectById('mingciyuan', false, 50, 53, 5);
+            // myChartsalv.setOption(optionslav);
+
+            // myCharts.showLoading();     //显示加载动画
+            let x = [];
+            let y = [];
+            let m = [];
+            let n = [];
+            // 客流
+            $.ajax({
+                url: "http://192.0.1.249:8082/NSLY/peopleTotal",
+                type: "POST",
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.Code === 200) {
+                        // 得到的数据=>数组.reverse();2021/10/12_153
+                        // console.log(res.Data.datestrpeople);
+                        res.Data.datestrpeople.reverse().map((item) => {
+                            m.push(item.split('_')[0].slice(5))
+                            n.push(item.split('_')[1])
+                        })
+                        // myCharts.hideLoading();             //隐藏加载效果
+                        console.log(m);
+                        console.log(n);
+                        myChart.setOption({
+                            xAxis: {
+                                type: 'category',                //坐标轴类型（类目轴）
+                                data: m
+                            },
+                            series: [
+
+                                //柱体
+                                {
+                                    name: "客流",
+                                    type: "bar",
+                                    barWidth: 20,
+                                    barGap: "0%",
+                                    itemStyle: {
+                                        normal: {
+                                            color: {
+                                                x: 0,
+                                                y: 0,
+                                                x2: 0,
+                                                y2: 1,
+                                                type: "linear",
+                                                global: false,
+                                                colorStops: [
+                                                    {
+                                                        offset: 0,
+                                                        color: "#43bafe"
+                                                    }
+
+                                                ],
+                                            },
+                                        },
+                                    },
+
+                                    data: n,
+                                },
+                            ]
+
+                        })
+                    }
+                },
+            });
+
+
+            $.ajax({
+                url: "http://192.0.1.249:8082/NSLY/vehicleTotal",
+                type: "POST",
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.Code === 200) {
+                        // 得到的数据=>数组.reverse();2021/10/12_153
+                        // console.log(res.Data.datestrvehicle);
+                        res.Data.datestrvehicle.reverse().map((item) => {
+                            x.push(item.split('_')[0].slice(5))
+                            y.push(item.split('_')[1])
+                        })
+                        console.log(x);
+                        console.log(y);
+
+                        // res.data.data.map((item) => {
+                        //     x.push(item.name);
+                        //     y.push(item.extn);
+                        // })
+                        // myCharts.hideLoading();             //隐藏加载效果
+
+                        myChart1.setOption({
+                            xAxis: {
+                                type: 'category',                //坐标轴类型（类目轴）
+                                data: x
+                            },
+                            series: [
+
+                                //柱体
+                                {
+                                    name: "车流",
+                                    type: "bar",
+                                    barWidth: 20,
+                                    barGap: "0%",
+                                    itemStyle: {
+                                        normal: {
+                                            color: {
+                                                x: 0,
+                                                y: 0,
+                                                x2: 0,
+                                                y2: 1,
+                                                type: "linear",
+                                                global: false,
+                                                colorStops: [
+                                                    {
+                                                        offset: 0,
+                                                        color: "#43bafe"
+                                                    }
+
+                                                ],
+                                            },
+                                        },
+                                    },
+
+                                    data: y,
+                                },
+                            ]
+
+                        })
+                    }
+                },
+            });
+
+        });
+
+        function setResolution(options, view3d) {
+            view3d.SetResolution(1920, 1080);
+
+        }
+
+
+        let view3d = new MapVision.View3d({
+            id: "mapvision3d",
+            url: "http://192.168.0.174:19901/aimapvision3d",//"http://192.0.1.252:19901/aimapvision3d",
+            projectId:"dd7ef97f70834dc1b8553d14e036591f", //"3aaabecb7b7244acaca7b985b8a9a2c4",
+            token: "d4af218e3c72f215b7168b6421faaeed"//"7c1a272ee8320ee6514e308c28b81b97"
+        });
+
+
+        //ue初始化
+        function InitUE(callback) {
+            return new Promise((resolve, reject) => {
+                view3d.Open(() => {
+                    resolve()
+                });
+            })
+        }
+
+        //选择设备类型
+        function Typedevice() {
+            let paramers = {
+                prefix: '0,1,2,3,4,5,6,7,8,9,a,b,c,e,f,s,q,CAMERA_',
+                path: '',
+                speedroute: 10
+            };
+            view3d.SetParameters(paramers);
+            view3d.SetResolution(1920, 1080); //点击设置分辨率
+            view3d.SetMouseCallback(res => {
+                console.log(res);
+                let codevide1 = res.attr.device_code;
+                let codevide = res.gid.split('_')[0];
+                console.log(codevide);
+                console.log(codevide1);
+                // var re = new RegExp("^[a-zA-Z]+$");
+                //要包含数字的话是 new RegExp("^[a-zA-Z0-9]+$"); 
+                // if (re.test(codevide)) { } else
+                startVod(codevide1)
+                // console.log("codevide---" + codevide)
+            });
+        }
+
+        function doNothing() {
+            window.event.returnValue = false;
+            return false;
+        }
+
+        //搜索请求
+        $("input").keydown(function () {
+            let date = {
+                area_name: "",
+            };
+            let Txt = $.trim($(".Txt-mes").val().replace(/\ +/g, ""));
+            console.log(Txt);
+
+            if (event.keyCode === 13) {
+
+                if (Txt != "" && Txt != null) {
+                    date.area_name = Txt;
+                    //清除滚动加载方法
+                    $('.dh-lx').off('scroll');
+                    $.post(url + "/sys/grave_search", date, function (data, status) {
+                        console.log(data.data);
+                        Navigdom(data.data, 200);
+                    });
+                } else {
+                    // date.area_name = "一区";
+                    $.post(url + "/sys/grave_search", date, function (data, status) {
+                        let numberSearch = 100;
+                        Navigdom(data.data, numberSearch);
+                        // console.log(data.data);
+                        // 获取滚动条事件,到底部的时候加载
+                        scrollUpload(data.data, numberSearch);
+                    });
+                }
+                console.log("keydown")
+
+            }
+
+        })
+
+        //设置时间
+        function time() {
+            let d = new Date()
+            let vYear = d.getFullYear()
+            let vMon = d.getMonth() + 1
+            let vDay = d.getDate()
+            let h = d.getHours();
+            let m = d.getMinutes();
+            let se = d.getSeconds();
+            let week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][d.getDay()];
+            /* 格式化分、秒，如果小于10则在前面拼接一个0 */
+            m = m < 10 ? "0" + m : m;
+            se = se < 10 ? "0" + se : se;
+            let time1 = h + ':' + m + ':' + se;
+            let time2 = week;
+            let time3 = vYear + '-' + vMon + '-' + vDay;
+            $('.title-time span').html(time1);
+            $('.title-time1 .week').html(time2);
+            $('.title-time1 .time1').html(time3);
+        }
+
+
+        let url = "http://192.168.0.74:8090/noone";
+        // let url = "http://192.168.1.108:8090/noone";
+        // var url = "http://localhost:8090/noone";
+
+        //客流/车辆tab的切换
+        $(".rightm-switch .switch-top span").click(function () {
+            // console.log($(this).index());
+
+            $(this).addClass('active_attrc').siblings().removeClass("active_attrc");
+
+            if ($(this).index() == 0) {
+                $(this).css('background', 'url(../img/qietu/tx-g.png) no-repeat');
+                $(this).siblings().css('background', 'url(../img/qietu/cl.png) no-repeat')
+            } else if ($(this).index() == 1) {
+                $(this).css('background', 'url(../img/qietu/cl-g.png) no-repeat');
+                $(this).siblings().css('background', 'url(../img/qietu/tx.png) no-repeat')
+            }
+
+            $(".switch-content .content-tab").eq($(this).index()).show().siblings().hide();
+        })
+
+        //墓穴统计
+        function MxTom() {
+            $.get(url + "/sys/grave_cut", function (data, status) {
+                // console.log(data.data);
+                Tombdom(data.data.sort((a, b) => a.order - b.order));
+
+            });
+        }
+
+
+
+        //点击墓穴统计
+        $('.leftm-top ul').on('click', "li", function () {
+            // console.log($(this).index());
+            $(this).children('span').addClass("selected2").parent().siblings().children('span').removeClass(
+                "selected2");
+            $(this).children('label').css('background', 'url(../img/qietu/sx1.png) no-repeat').parent()
+                .siblings().children('label').css('background', 'url(../img/qietu/sx.png) no-repeat')
+        })
+
+        function Setroute() {
+            let date = {
+                area_name: "",
+            };
+            let Txt = $.trim($(".Txt-mes").val().replace(/\ +/g, ''));
+            if (Txt != "" && Txt != null) {
+                date.area_name = Txt;
+            } else {
+                date.area_name = "";
+            }
+            console.log("Setroute")
+            $.post(url + "/sys/grave_search", date, function (data, status) {
+                let number = 100;
+                Navigdom(data.data, number);
+                // console.log(data.data);
+                // 获取滚动条事件,到底部的时候加载        
+                scrollUpload(data.data, number);
+            });
+        }
+
+        //滚动加载
+        function scrollUpload(data, num) {
+            $('.dh-lx').scroll(function (event) {
+                var t = event.currentTarget.scrollTop;
+                var s = event.currentTarget.scrollHeight;
+                var c = event.currentTarget.clientHeight;
+                if (t + c >= s) {
+                    console.log('底部加载数据');
+                    num = num + 100;
+                    Navigdom(data, num)
+                }
+            })
+        }
+
+
+        function spendTime(func) {
+            let start = new Date();
+            func();
+            let end = new Date();
+            console.log('花费 ', end - start, 'ms')
+        }
+
+        //设备相机
+        function SetVideo() {
+            $.post(url + "/sys/grave_video", function (data, status) {
+                console.log(data.data);
+                data.data[0].count = 253;
+                data.data[1].count = 74;
+                data.data[2].count = 36;
+                Videodom(data.data);
+            });
+        }
+
+        //文化名人统计  
+        function SetmrTolte() {
+            $.post(url + "/sys/grave_info", function (data, status) {
+                mrTotle(data.data);
+            });
+        }
+
+        //南山陵园统计
+        function SetmrTolte1() {
+            $.post(url + "/sys/grave_infosoul", function (data, status) {
+                mrTotle1(data.data);
+            });
+        }
+
+
+        // 名人墓的tab切换
+        $('.switch-frame span').click(function () {
+            // console.log($(this).index());
+            if ($(this).index() == 0) {
+                $(this).css('background', 'url(../img/qietu/jx2.png) no-repeat');
+                $(this).siblings().css('background', 'url(../img/qietu/jx1.png) no-repeat')
+            } else if ($(this).index() == 1) {
+                $(this).css('background', 'url(../img/qietu/jx2.png) no-repeat');
+                $(this).siblings().css('background', 'url(../img/qietu/jx1.png) no-repeat')
+            }
+            $(".switch-fcontent ul").eq($(this).index()).show().siblings().hide();
+        })
+
+        let flid;
+        // mingciyuan
+        // 飞到墓区进行显示
+        function dianji(index) {
+            console.log(index);
+            if (flid != null)
+                if (index === 'qiaoerqu') {
+                    view3d.UpdateObjectVisibleByPrefix(flid, false);
+                    view3d.FlyToObjectById("qiaoyiqu", false, 53, 100, 5);
+                    view3d.UpdateObjectVisibleByPrefix(index, true);
+                } else if (index === 'laoganbuqu') {
+                    view3d.UpdateObjectVisibleByPrefix(flid, false);
+                    view3d.FlyToObjectById("qiaoyiqu", false, 53, 120, 5);
+                    view3d.UpdateObjectVisibleByPrefix(index, true);
+                } else {
+                    view3d.UpdateObjectVisibleByPrefix(flid, false);
+                    // false, 50, 53, 5
+                    view3d.FlyToObjectById(index, false, 53, 100, 5);
+                    //设置建筑的显示
+                    view3d.UpdateObjectVisibleByPrefix(index, true);
+                }
+
+            flid = index;
+        }
+
+        //墓穴统计dom
+        function Tombdom(str) {
+            let html = "",
+                count = 0;
+            //$.map遍历
+            $.map(str, function (item, index) {
+                index++;
+                html +=
+                    ` <li onclick="dianji('` + item.qy + `')"><span><i>` +
+                    item.qyname +
+                    `</i><i>` +
+                    item.qycount +
+                    `</i></span><label style="color:white">` +
+                    index +
+                    `</label> </li>`;
+                // console.log(parseInt(item.count));
+                count += parseInt(item.qycount);
+            });
+            // let str=`<h2>`+count+`</h2>`
+            $(".m-top-totle").append(`<h2>` + count + `</h2>`);
+            $(".spinner").css("display", "none");
+
+            console.log("总数：" + count);
+            $(".leftm-top ul").append(html);
+
+        }
+
+        // 存储所有墓碑的信息
+        let global_var = {};
+        //线路导航dom
+        function Navigdom(str, number) {
+            global_var.str = str;
+            // console.log("Navigdom", str)
+            let htmls = [];
+            $.each(str.slice(0, number), function (index, item) {
+                htmls.push(`<li><P class="qid"><span></span><span>大厅</span><span onclick="Routegt('` +
+                    item.id +
+                    `')">路线</span></P>
+                <P class="zongd"><span></span><span>` +
+                    item.area_name + "-" + item.name +
+                    `</span><span onclick="Naviggt('` + item.id + `')">导航</span></P> </li> `);
+
+            });
+            $(".dh-lx").empty();
+            $(".spinner").css("display", "none");
+            $(".dh-lx").append(htmls.join(''));
+
+        }
+
+        //设备分布dom
+        function Videodom(str) {
+            let html = "";
+            $.map(str, function (item, index) {
+                html +=
+                    `<li><img onclick="Devicforlis('` +
+                    item.type_name +
+                    `')" src="` + item.remark + `"> <span><label>` +
+                    item.type_name +
+                    `</label><label>` +
+                    item.count +
+                    `</label></span></li>`;
+            });
+            $(".spinner").css("display", "none");
+            $(".ent-sbfb").append(html);
+        }
+
+        //文化名人统计dom
+        function mrTotle(str) {
+            let html = "";
+            $.map(str, function (item, index) {
+                html +=
+                    ` <li><span onclick="Disform('` +
+                    item.id +
+                    `','` +
+                    item.areaid +
+                    `')"><label class="whmr-t">` +
+                    item.positions +
+                    `</label><label class="whmr-b">` +
+                    item.name +
+                    `</label></span></li>`;
+            });
+            $(".spinner").css("display", "none");
+            $(".mr-tol").append(html);
+        }
+
+        //南山英魂统计dom
+        function mrTotle1(str) {
+            let html = "";
+            $.map(str, function (item, index) {
+                html +=
+                    ` <li><span onclick="Disform1('` +
+                    item.id +
+                    `','` +
+                    item.areaid +
+                    `')"><label class="whmr-t">` +
+                    item.positions +
+                    `</label><label class="whmr-b">` +
+                    item.name +
+                    `</label></span></li>`;
+            });
+            $(".spinner").css("display", "none");
+            $(".mr-tol1").append(html);
+        }
+
+        //文化名人详情
+        function Disform(id, areaid) {
+            DisformClose(1);
+            view3d.Clear();
+            setTimeout(function () {
+                $(".ifrm-tc").empty();
+                $(".ifrm-tc").css("display", "block");
+
+                console.log("Disform", areaid)
+                console.log("id", id);
+                //飞到特定的墓碑
+                // view3d.FlyToObjectById(areaid, true);
+                view3d.FlyToObjectById(areaid, false);
+
+                let date = {
+                    id: id
+                };
+                let html = "";
+                $.post(url + "/sys/grave_info", date, function (data, status) {
+                    html =
+                        `<p><span>` +
+                        data.data[0].positions +
+                        `</span><span>` +
+                        data.data[0].name +
+                        `</span><label onclick="DisformClose(1)">X</label></p>
+                        <p><span onclick="Disformimg(1,'` +
+                        data.data[0].people_img +
+                        `')">照片</span><span onclick="Disformimg(2,' ')">简介</span><span onclick="Disformimg(1,'` +
+                        data.data[0].production_img +
+                        `')">作品</span></p>
+                        <img src="` +
+                        data.data[0].people_img +
+                        `" style="background-size: contain;">
+                        <div class="Jjinfo">
+                              <i>` +
+                        data.data[0].name +
+                        data.data[0].birth +
+                        `</i><br/>
+                              <i>安葬位置：` +
+                        data.data[0].positions +
+                        `</i><br/>
+                              <span>` +
+                        data.data[0].instroduce +
+                        `</span>
+                        </div>`;
+                    $(".ifrm-tc").append(html);
+                    // $(".ifrm-tc").css("display", "block");
+
+                    // $("ifrm-tc").fadeIn();
+
+                    if (
+                        data.data[0].people_img == null ||
+                        data.data[0].people_img == ""
+                    ) {
+                        $(".ifrm-tc p:nth-child(2) span:nth-child(1)").css(
+                            "display",
+                            "none"
+                        );
+                    }
+                    if (data.data[0].name == null || data.data[0].name == "") {
+                        $(".ifrm-tc p:nth-child(2) span:nth-child(2)").css(
+                            "display",
+                            "none"
+                        );
+                    }
+                    console.log(data.data[0].people_img);
+                    if (
+                        data.data[0].production_img == null ||
+                        data.data[0].production_img == ""
+                    ) {
+                        $(".ifrm-tc p:nth-child(2) span:nth-child(3)").css(
+                            "display",
+                            "none"
+                        );
+                    }
+                });
+            }, 500);
+        }
+
+        //南山英魂详情
+        function Disform1(id, areaid) {
+            console.log(areaid);
+            DisformClose(1);
+            view3d.Clear();
+            setTimeout(function () {
+                $(".ifrm-tc").empty();
+                $(".ifrm-tc").css("display", "block");
+
+                console.log("Disform", areaid)
+                console.log("id", id);
+                //飞到特定的墓碑
+                if (areaid != "null") {
+                    view3d.FlyToObjectById(areaid, true);
+                } else {
+                    view3d.FlyToObjectById('Lieshilingyuan', true);
+                }
+
+                let date = {
+                    id: id
+                };
+                let html = "";
+                $.post(url + "/sys/grave_infosoul", date, function (data, status) {
+                    html =
+                        `<p><span>` +
+                        data.data[0].positions +
+                        `</span><span>` +
+                        data.data[0].name +
+                        `</span><label onclick="DisformClose(1)">X</label></p>
+                        <p><span onclick="Disformimg(1,'` +
+                        data.data[0].people_img +
+                        `')">照片</span><span onclick="Disformimg(2,' ')">简介</span><span onclick="Disformimg(1,'` +
+                        data.data[0].production_img +
+                        `')">作品</span></p>
+                        <img src="` +
+                        data.data[0].people_img +
+                        `" style="background-size: contain;">
+                        <div class="Jjinfo">
+                              <i>` +
+                        data.data[0].name +
+                        data.data[0].birth +
+                        `</i><br/>
+                              <i>安葬位置：` +
+                        data.data[0].positions +
+                        `</i><br/>
+                              <span>` +
+                        data.data[0].instroduce +
+                        `</span>
+                        </div>`;
+                    $(".ifrm-tc").append(html);
+                    // $(".ifrm-tc").css("display", "block");
+
+                    // $("ifrm-tc").fadeIn();
+
+                    if (
+                        data.data[0].people_img == null ||
+                        data.data[0].people_img == ""
+                    ) {
+                        $(".ifrm-tc p:nth-child(2) span:nth-child(1)").css(
+                            "display",
+                            "none"
+                        );
+                    }
+                    if (data.data[0].name == null || data.data[0].name == "") {
+                        $(".ifrm-tc p:nth-child(2) span:nth-child(2)").css(
+                            "display",
+                            "none"
+                        );
+                    }
+                    console.log(data.data[0].people_img);
+                    if (
+                        data.data[0].production_img == null ||
+                        data.data[0].production_img == ""
+                    ) {
+                        $(".ifrm-tc p:nth-child(2) span:nth-child(3)").css(
+                            "display",
+                            "none"
+                        );
+                    }
+                });
+            }, 500);
+        }
+
+
+        //设备列表
+        function Devicforlis(type) {
+            $(".ifrm-tc-devic").css("display", "block");
+            $(".ifrm-tc-devic").empty();
+            var data = {
+                type_name: type
+            },
+                k = 1,
+                k_k = 1;
+            console.log("日志" + JSON.stringify(data));
+            var html =
+                ` <p><span>` +
+                type +
+                `设备列表</span><label onclick="DisformClose(2)">X</label></p><div class="devic-list"><ul>`;
+            $.post(url + "/sys/grave_video", data, function (msg, status) {
+                console.log("设备结构" + JSON.stringify(msg.data))
+                debugger
+                if (!msg.data.empty) {
+                    $.map(msg.data, function (item, index) {
+                        // html +=
+                        //   ` <span onclick="Deviction('` +
+                        //   item.device_code +
+                        //   `')">` +
+                        //   item.device_name +
+                        //   `</span>`;
+                        if (item.order_num != "" && item.order_num != undefined) {
+                            var treename = "treestr" + k
+                            html += `<li class="tree-list ` + treename +
+                                `" ><span class="list-span display-tree hide-tree" onclick="ONChild('` +
+                                treename + `')">` + item.organiz_name + `</span>`
+                            //if (item.order_num != null && item.order_num != undefined) {}
+                            html += `<ul>`
+
+                            if (!item.order_num.num.empty) {
+
+                                item.order_num.num.forEach(item_child => {
+                                    var treestr_child = treename + k_k
+
+                                    html += `<li class="tree-list ` + treestr_child +
+                                        ` Child-mxul" ><span class="list-span hide-tree display-tree " onclick="ONChild('` +
+                                        treestr_child + `')">` + item_child.organiz_name +
+                                        `</span>`
+                                    if (item_child.order_num != null && item_child.order_num !=
+                                        undefined) {
+
+                                        html += `<ul>`
+                                        item_child.order_num.forEach(item_child_child => {
+                                            console.log(item_child_child.device_info);//
+                                            html +=
+                                                `<li class="Tresschild"><span class="list-span" onclick="Deviction('` +
+                                                item_child_child.device_code +
+                                                `')">` + item_child_child.device_name +
+                                                `</span></li>`
+                                        });
+                                        html += `</ul></li>`
+                                    }
+                                    k_k++;
+                                });
+                                // html += `</ul></li>`
+                            }
+                            if (!item.order_num.list.empty) {
+                                //html += `<ul>`
+                                console.log(item.order_num.list);
+
+                                item.order_num.list.forEach(element => {
+                                    console.log(element.device_info);
+
+                                    html +=
+                                        `<li class="Tresschild"><span class="list-span" onclick="Deviction('` +
+                                        element.device_code +
+                                        `')">` + element.device_name + `</span></li>`
+                                });
+                            }
+                            html += `</ul></li>`
+                            if (item.order_num.list.empty && item.order_num.num.empty) {
+                                html += `</li>`
+                            }
+                            k++;
+                        }
+                    });
+                }
+                html += `</ul></div>`;
+                $(".spinner").css("display", "none");
+                $(".ifrm-tc-devic").append(html);
+
+
+            });
+        }
+
+        function ONChild(treestr) {
+
+            if ($('.' + treestr + '').children('ul').css('display') == 'none') {
+                $('.' + treestr + '').children('ul').show()
+
+                $('.' + treestr + ' .list-span').addClass("display-tree");
+                $('.' + treestr + ' .list-span').removeClass("hide-tree");
+                if ($('.' + treestr + '').children('ul').children('.Child-mxul').length > 0) {
+                    $('.Child-mxul .list-span').addClass("hide-tree");
+                    $('.Child-mxul .list-span').removeClass("display-tree");
+                }
+                // $('.'+treestr+' span:before').css('content','"-"')
+            } else {
+                $('.' + treestr + '').children('ul').hide()
+
+                $('.' + treestr + ' .list-span').addClass("hide-tree");
+                $('.' + treestr + ' .list-span').removeClass("display-tree");
+                // $('.'+treestr+' span:before').css('content','"+"')
+
+            }
+
+        }
+
+        //照片
+        function Disformimg(index, item) {
+            switch (index) {
+                case 1:
+                    $(".Jjinfo").css("display", "none");
+                    $(".ifrm-tc img").css("display", "block");
+                    $(".ifrm-tc img").attr("src", item);
+                    break;
+                case 2:
+                    $(".ifrm-tc img").css("display", "none");
+                    $(".Jjinfo").css("display", "block");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        //关闭
+        function DisformClose(index) {
+            switch (index) {
+                case 1:
+                    $(".ifrm-tc").css("display", "none");
+                    $(".ifrm-tc").empty();
+                    break;
+                case 2:
+                    $(".ifrm-tc-devic").css("display", "none");
+                    $(".ifrm-tc-devic").empty();
+                    break;
+                case 3:
+                    $(".cemetery").css("display", "none");
+                    $(".cemetery").empty();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        let strlis;
+
+        function Shapfile() {
+            shapefile.open("http://127.0.0.1:5502/CG/arc.shp")
+                .then(source => source.read()
+                    .then(function log(result) {
+                        if (result.done) return;
+                        console.log(result.value);
+
+                        return source.read().then(log);
+                    }))
+                .catch(error => console.error(error.stack));
+
+        }
+
+        //路线(根据传入的是墓碑ID)---巡游的路线---选择设备
+        function Routegt(code) {
+
+            closet();//
+            let data, start, end;
+            let getstr, endstr;
+
+            // ------------显示墓区的名称与列表----------------
+            setTimeout(function () {
+                "closet()";
+                $(".cemetery").empty();
+                $(".cemetery").css("display", "block");
+
+                // console.log("Disform", code)
+
+                // //飞到特定的墓碑
+                view3d.FlyToObjectById(code, false, 50, 10, 150);
+
+                let date = { id: code };
+                let html = "";
+                $.post(url + "/sys/grave_infodetailslx", date, function (data, status) {
+                    if (data.data[0].slope === null || data.data[0].slope === '') {
+                        html =
+                            `<div class="cemetery-top">` +
+                            `<p><span>&nbsp&nbsp` + data.data[0].area_name +
+                            `</span><label onclick="DisformClose(3)">X</label></p>` + `</div><div class="cemetery-content">` +
+                            `<p>&nbsp区位号：<span>` + data.data[0].row + `排&nbsp` + data.data[0].columns + `号` + `</span></p>` +
+                            `<p>&nbsp墓主名称：<span>` + data.data[0].name + `</span></p></div>`
+
+                        $(".cemetery").append(html);
+                    } else {
+                        html =
+                            `<div class="cemetery-top">` +
+                            `<p><span>&nbsp&nbsp` + data.data[0].area_name +
+                            `</span><label onclick="DisformClose(3)">X</label></p>` + `</div><div class="cemetery-content">` +
+                            `<p>&nbsp区位号：<span>` + data.data[0].slope + `坡&nbsp` + data.data[0].row + `排&nbsp` + data.data[0].columns + `号` + `</span></p>` +
+                            `<p>&nbsp墓主名称：<span>` + data.data[0].name + `</span></p></div>`
+
+                        $(".cemetery").append(html);
+                    }
+                });
+            }, 100);
+
+
+            //开始的路线
+            let codeRoutegt;//判断前缀
+            if (code.indexOf('_') > 0) {
+                codeRoutegt = code.split('_')[1].slice(0, 4);
+            } else {
+                codeRoutegt = code.slice(0, 4);
+            }
+            console.log(codeRoutegt);
+
+
+            //通过codeRoutegt判断前缀的不同来进行不同的路线的设计
+            if (codeRoutegt === 'GYEQ') {
+                start = {
+                    floor: "W1",
+                    x: 8.9878271484375,
+                    y: -18.105792236328125,
+                };
+
+                //根据传入的id进行查找出来终点坐标
+                view3d.FindObjectById(code, (res) => {
+                    let strObj = JSON.stringify(res);
+                    end = {
+                        floor: "W1",
+                        x: parseFloat(res.position.x) / 100,
+                        y: parseFloat(res.position.y) / -100,
+                    };
+                    //把当前这个的id的开始路径和结束路径post,(data=参数)
+                    data = {
+                        project: "mv_hz_nsly",
+                        start: start,
+                        end: end,
+                    };
+                    console.log("data:" + JSON.stringify(data));
+                    // 把这个起始的路线传递进去
+                    $.ajax({
+                        //url: "http://192.0.1.249:9901/api/route/shortestpath4",
+                        url: "http://192.0.1.252:19901/aimapvision3d/shortestpath/find4?key=7c1a272ee8320ee6514e308c28b81b97",
+                        //url: "http://116.62.158.164:9901//api/route/shortestpath4",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        headers: {
+                            "Content-Type": "application/json",
+                            accept: "*/*"
+                        },
+                        success: function (res) {
+                            if (res.code === 200) {
+                                let z1 = 1200;d
+                                console.log(res.data);
+                                // console.log(res.data.length);
+                                //终点x的值
+                                console.log(res.data[res.data.length - 1].x);
+                                // 终点y的值
+                                console.log(res.data[res.data.length - 1].y);
+                                //一区： x:-53.3047509765625  y:54.56537109375  x:-19.8623486328125 y:53.368515625
+
+                                res.data.forEach((itme, index) => {
+                                    // z = z + 50
+                                    itme.y = -itme.y * 100;
+                                    itme.x = itme.x * 100;
+                                    itme.z = 3000;
+                                })
+
+                                let datastr = {
+                                    style: "sim_spot", //路线的样式 sim_dot
+                                    showloc: false, // 是否显示起始点图标loc
+                                    width: 150, // 路径的宽度
+                                    "distance": 50,// 可视距离  > 0.01 单位厘米
+                                    pitch: 25,// 俯仰角， 范围：0——90度
+                                    speed: 20, // 路径的播放，距离/帧速，默认20
+                                    geom: res.data,
+                                };
+                                strlis = datastr;
+
+                                //创建路径
+                                view3d.CreateRoute(datastr);
+
+                                let objQ = {
+                                    gid: 'CUSTOM_ID1', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Q",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[0].x,
+                                        y: res.data[0].y,
+                                        z: res.data[0].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objQ, (res) => { });
+                                let objZ = {
+                                    gid: 'CUSTOM_ID2', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Z",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[res.data.length - 1].x,
+                                        y: res.data[res.data.length - 1].y,
+                                        z: res.data[res.data.length - 1].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objZ, (res) => { });
+
+                                // view3d.PauseRoute();
+                                //view3d.StartRoute(datastr);
+                            }
+                        },
+                    });
+                    //选择设备类型
+                    Typedevice();
+                });
+
+
+            } else if (codeRoutegt === 'YQL0') {
+                start = {
+                    floor: "W1",
+                    x: 8.9878271484375,
+                    y: -18.105792236328125,
+                };
+
+                //根据传入的id进行查找出来终点坐标
+                view3d.FindObjectById(code, (res) => {
+                    let strObj = JSON.stringify(res);
+                    end = {
+                        floor: "W1",
+                        x: parseFloat(res.position.x) / 100,
+                        y: parseFloat(res.position.y) / -100,
+                    };
+                    //把当前这个的id的开始路径和结束路径post,(data=参数)
+                    data = {
+                        project: "mv_hz_nsly",
+                        start: start,
+                        end: end,
+                    };
+                    console.log("data:" + JSON.stringify(data));
+                    // 把这个起始的路线传递进去
+                    $.ajax({
+                        //url: "http://192.0.1.249:9901/api/route/shortestpath4",
+                        url: "http://192.0.1.252:19901/aimapvision3d/shortestpath/find4?key=7c1a272ee8320ee6514e308c28b81b97",
+                        //url: "http://116.62.158.164:9901//api/route/shortestpath4",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        headers: {
+                            "Content-Type": "application/json",
+                            accept: "*/*"
+                        },
+                        success: function (res) {
+                            if (res.code === 200) {
+                                let z1 = 1200;
+                                console.log(res.data);
+                                // console.log(res.data.length);
+                                //终点x的值
+                                console.log(res.data[res.data.length - 1].x);
+                                // 终点y的值
+                                console.log(res.data[res.data.length - 1].y);
+                                //一区： x:-53.3047509765625  y:54.56537109375  x:-19.8623486328125 y:53.368515625
+                                if (-54 < res.data[res.data.length - 1].x && res.data[res.data.length - 1].x < -19 &&
+                                    46 < res.data[res.data.length - 1].y && res.data[res.data.length - 1].y < 60) {
+                                    res.data.forEach((itme, index) => {
+                                        if (index <= 9) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1200;
+                                        } else if (index > 9 && index <= 11) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1500;
+                                        } else {
+                                            // z = z + 50
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 2032;
+                                        }
+                                    })
+                                    // 一区下方 x：-51.4277978515625，y：42.571611328125 x：-16.315106201171876  y：31.31355224609375
+                                } else if (-51 < res.data[res.data.length - 1].x && res.data[res.data.length - 1].x < -16 &&
+                                    31 < res.data[res.data.length - 1].y && res.data[res.data.length - 1].y < 43) {
+                                    res.data.forEach((itme, index) => {
+                                        if (index <= 9) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1200;
+                                        } else if (index > 9 && index <= 11) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1400;
+                                        } else {
+                                            // z = z + 50
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1900;
+                                        }
+                                    })
+
+                                    // 一区右边x：-17.88543212890625 y：61.219931640625 x：-12.67962158203125 y：39.8185498046875
+                                } else if (-18 < res.data[res.data.length - 1].x && res.data[res.data.length - 1].x < 0 &&
+                                    39 < res.data[res.data.length - 1].y && res.data[res.data.length - 1].y < 65) {
+                                    res.data.forEach((itme, index) => {
+                                        if (index <= 9) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1200;
+                                        } else if (index > 9 && index <= 11) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1400;
+                                        } else {
+                                            // z = z + 50
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1820;
+                                        }
+                                    })
+                                    // 二区左边 x:-56.082041015625 -54.752109375 -23.78549072265625 y:77.5560546875 54.5887646484375 61.60064453125
+                                } else if (-57 < res.data[res.data.length - 1].x && res.data[res.data.length - 1].x < -22 &&
+                                    54 < res.data[res.data.length - 1].y && res.data[res.data.length - 1].y < 85) {
+                                    res.data.forEach((itme, index) => {
+                                        if (index <= 9) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1200;
+                                        } else if (index > 9 && index <= 11) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1400;
+                                        } else if (index > 11 && index <= 28) {
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 1900;
+                                        }
+                                        else {
+                                            // z = z + 50
+                                            itme.y = -itme.y * 100;
+                                            itme.x = itme.x * 100;
+                                            itme.z = 2100;
+                                        }
+                                    })
+
+                                }
+                                else {
+                                    res.data.forEach((itme, index) => {
+                                        // z = z + 50
+                                        itme.y = -itme.y * 100;
+                                        itme.x = itme.x * 100;
+                                        itme.z = 3000;
+                                    })
+                                }
+
+                                let datastr = {
+                                    style: "sim_spot", //路线的样式 sim_dot
+                                    showloc: false, // 是否显示起始点图标loc
+                                    width: 150, // 路径的宽度
+                                    "distance": 50,// 可视距离  > 0.01 单位厘米
+                                    pitch: 25,// 俯仰角， 范围：0——90度
+                                    speed: 20, // 路径的播放，距离/帧速，默认20
+                                    geom: res.data,
+                                };
+                                strlis = datastr;
+
+                                //创建路径
+                                view3d.CreateRoute(datastr);
+
+                                let objQ = {
+                                    gid: 'CUSTOM_ID1', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Q",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[0].x,
+                                        y: res.data[0].y,
+                                        z: res.data[0].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objQ, (res) => { });
+                                let objZ = {
+                                    gid: 'CUSTOM_ID2', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Z",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[res.data.length - 1].x,
+                                        y: res.data[res.data.length - 1].y,
+                                        z: res.data[res.data.length - 1].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objZ, (res) => { });
+
+                                // view3d.PauseRoute();
+                                //view3d.StartRoute(datastr);
+                            }
+                        },
+                    });
+                    //选择设备类型
+                    Typedevice();
+                });
+
+            } else if (codeRoutegt === 'QYQZ') {
+                start = {
+                    floor: "W1",
+                    x: -39131.77734375,
+                    y: -2539.47900390625,
+                };
+
+                //根据传入的id进行查找出来终点坐标
+                view3d.FindObjectById(code, (res) => {
+                    let strObj = JSON.stringify(res);
+                    end = {
+                        floor: "W1",
+                        x: parseFloat(res.position.x) / 100,
+                        y: parseFloat(res.position.y) / -100,
+                    };
+                    //把当前这个的id的开始路径和结束路径post,(data=参数)
+                    data = {
+                        project: "mv_hz_nsly",
+                        start: start,
+                        end: end,
+                    };
+                    console.log("data:" + JSON.stringify(data));
+                    // 把这个起始的路线传递进去
+                    $.ajax({
+                        //url: "http://192.0.1.249:9901/api/route/shortestpath4",
+                        url: "http://192.0.1.252:19901/aimapvision3d/shortestpath/find4?key=7c1a272ee8320ee6514e308c28b81b97",
+                        //url: "http://116.62.158.164:9901//api/route/shortestpath4",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        headers: {
+                            "Content-Type": "application/json",
+                            accept: "*/*"
+                        },
+                        success: function (res) {
+                            if (res.code === 200) {
+                                let z1 = 1200;
+                                console.log(res.data);
+                                // console.log(res.data.length);
+                                //终点x的值
+                                console.log(res.data[res.data.length - 1].x);
+                                // 终点y的值
+                                console.log(res.data[res.data.length - 1].y);
+                                //一区： x:-53.3047509765625  y:54.56537109375  x:-19.8623486328125 y:53.368515625
+
+                                res.data.forEach((itme, index) => {
+                                    // z = z + 50
+                                    itme.y = -itme.y * 100;
+                                    itme.x = itme.x * 100;
+                                    itme.z = 4500;
+                                })
+
+                                let datastr = {
+                                    style: "sim_spot", //路线的样式 sim_dot
+                                    showloc: false, // 是否显示起始点图标loc
+                                    width: 150, // 路径的宽度
+                                    "distance": 50,// 可视距离  > 0.01 单位厘米
+                                    pitch: 25,// 俯仰角， 范围：0——90度
+                                    speed: 20, // 路径的播放，距离/帧速，默认20
+                                    geom: res.data,
+                                };
+                                strlis = datastr;
+
+                                //创建路径
+                                view3d.CreateRoute(datastr);
+
+                                let objQ = {
+                                    gid: 'CUSTOM_ID1', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Q",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[0].x,
+                                        y: res.data[0].y,
+                                        z: res.data[0].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objQ, (res) => { });
+                                let objZ = {
+                                    gid: 'CUSTOM_ID2', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Z",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[res.data.length - 1].x,
+                                        y: res.data[res.data.length - 1].y,
+                                        z: res.data[res.data.length - 1].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objZ, (res) => { });
+
+                                // view3d.PauseRoute();
+                                //view3d.StartRoute(datastr);
+                            }
+                        },
+                    });
+                    //选择设备类型
+                    Typedevice();
+                });
+
+            } else {
+                start = {
+                    floor: "W1",
+                    x: 8.9878271484375,
+                    y: -18.105792236328125,
+                };
+
+                //根据传入的id进行查找出来终点坐标
+                view3d.FindObjectById(code, (res) => {
+                    let strObj = JSON.stringify(res);
+                    end = {
+                        floor: "W1",
+                        x: parseFloat(res.position.x) / 100,
+                        y: parseFloat(res.position.y) / -100,
+                    };
+                    //把当前这个的id的开始路径和结束路径post,(data=参数)
+                    data = {
+                        project: "mv_hz_nsly",
+                        start: start,
+                        end: end,
+                    };
+                    console.log("data:" + JSON.stringify(data));
+                    // 把这个起始的路线传递进去
+                    $.ajax({
+                        //url: "http://192.0.1.249:9901/api/route/shortestpath4",
+                        url: "http://192.0.1.252:19901/aimapvision3d/shortestpath/find4?key=7c1a272ee8320ee6514e308c28b81b97",
+                        //url: "http://116.62.158.164:9901//api/route/shortestpath4",
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        dataType: "json",
+                        headers: {
+                            "Content-Type": "application/json",
+                            accept: "*/*"
+                        },
+                        success: function (res) {
+                            if (res.code === 200) {
+                                let z1 = 1200;
+                                console.log(res.data);
+                                // console.log(res.data.length);
+                                //终点x的值
+                                console.log(res.data[res.data.length - 1].x);
+                                // 终点y的值
+                                console.log(res.data[res.data.length - 1].y);
+                                //一区： x:-53.3047509765625  y:54.56537109375  x:-19.8623486328125 y:53.368515625
+
+                                res.data.forEach((itme, index) => {
+                                    // z = z + 50
+                                    itme.y = -itme.y * 100;
+                                    itme.x = itme.x * 100;
+                                    itme.z = 3000;
+                                })
+
+                                let datastr = {
+                                    style: "sim_spot", //路线的样式 sim_dot
+                                    showloc: false, // 是否显示起始点图标loc
+                                    width: 150, // 路径的宽度
+                                    "distance": 50,// 可视距离  > 0.01 单位厘米
+                                    pitch: 25,// 俯仰角， 范围：0——90度
+                                    speed: 20, // 路径的播放，距离/帧速，默认20
+                                    geom: res.data,
+                                };
+                                strlis = datastr;
+
+                                //创建路径
+                                view3d.CreateRoute(datastr);
+
+                                let objQ = {
+                                    gid: 'CUSTOM_ID1', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Q",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[0].x,
+                                        y: res.data[0].y,
+                                        z: res.data[0].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objQ, (res) => { });
+                                let objZ = {
+                                    gid: 'CUSTOM_ID2', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+                                    type: "image", // 10102  或  image
+                                    style: "green_Z",
+                                    scale: 2,
+                                    location: {
+                                        x: res.data[res.data.length - 1].x,
+                                        y: res.data[res.data.length - 1].y,
+                                        z: res.data[res.data.length - 1].z,
+                                        pitch: 0, // 俯仰角 0——90度
+                                        yaw: 0, // 偏航角 0-360度
+                                        roll: 0, // 翻滚角
+                                    },
+                                };
+                                view3d.OverLayerCreateObject(objZ, (res) => { });
+
+                                // view3d.PauseRoute();
+                                //view3d.StartRoute(datastr);
+                            }
+                        },
+                    });
+                    //选择设备类型
+                    Typedevice();
+                });
+            }
+        }
+
+        //点击导航----路径的播放
+        function Naviggt(code) {
+            //view3d.StartRoute(strlis);
+            console.log(11);
+            console.log(strlis);
+            view3d.PlayRoute(res => {
+                // 返回播放结束节点的位置和索引
+                console.log(res);
+            });
+            // view3d.PauseRoute();
+            //  ue4("GoToMesh",code);
+        }
+
+        //相机----点击相机飞过去---点击每一个摄像头对象执行初始化的方法
+        function Deviction(code) {
+            // debugger
+
+
+            console.log(code);
+            startVod(code.split('_')[0]);
+            console.log("Deviction", code)
+            view3d.FlyToObjectById(code, false);
+        }
+
+        //清除
+        function closet() {
+            // 清除标志物
+            // view3d.OverLayerRemoveAll();
+            view3d.OverLayerRemoveObjectById('CUSTOM_ID1')
+            view3d.OverLayerRemoveObjectById('CUSTOM_ID2')
+            view3d.Clear();
+            Typedevice();
+        }
+
+        //复位
+        function reset() {
+            // 隐藏所有的建筑
+            for (let i = 0; i < yinchang.length; i++) {
+                YC(yinchang[i])
+            }
+            // view3d.Clear();
+            view3d.ResetHome();
+            getNext();
+        }
+
+        //刷新
+        function RefreshUemap() {
+            let wsImpl = window.WebSocket || window.MozWebSocket;
+            // create a new websocket and connect
+            window.ws = new wsImpl('ws://127.0.0.1:7181/');
+
+            // when the connection is established, this method is called
+            ws.onopen = function () {
+                console.log('Refresh.. connection open');
+                ws.send(" ");
+                setTimeout(function () {
+                    location.reload()
+                }, 4500);
+                console.log("Refresh..OK")
+            };
+
+            // when the connection is closed, this method is called
+            ws.onclose = function () {
+                console.log('Refresh.. connection closed');
+            }
+        }
+
+        //关闭窗口
+        function videoDisplay() {
+            $("#videoKongz").hide();
+            if (onwebControl != undefined && onwebControl != null) {
+                DemomethodSet.xioahuisp();
+            }
+        }
+
+        let codef;
+
+        //回放
+        function huifang() {
+            let code = codef
+            let sdtime4 = new Date().setMonth(new Date().getMonth() - 1);
+            let startTime = dateFormat(new Date(sdtime4), "yyyy-MM-dd 00:00:00"); //开始时间
+            let endTime = dateFormat(new Date(), "yyyy-MM-dd 23:59:59"); //结束时间
+            console.log(startTime, endTime);
+            $("#videoKongz").show();
+            if (onwebControl !== undefined) {
+                if (indexplay == 1) {
+                    DemomethodSet.playback1(code, startTime, endTime);
+                } else {
+                    onwebControl.JS_HideWnd(); // 先让窗口隐藏，规避插件窗口滞后于浏览器消失问题
+                    onwebControl.JS_Disconnect().then(
+                        function () {
+                            // 断开与插件服务连接成功
+                            onwebControl = undefined;
+                            DemomethodSet.initPlugin(code, 1, startTime, endTime);
+                        },
+                        function () {
+                            // 断开与插件服务连接失败
+                        }
+                    );
+                }
+            } else {
+                DemomethodSet.initPlugin(code, 1, startTime, endTime);
+            }
+            indexplay = 1;
+        }
+
+        //预览打开视频-----
+        function startVod(code) {
+            console.log('打开视频')
+            console.log(code)
+            codef = code;
+            $("#videoKongz").show();
+            if (onwebControl !== undefined) {
+                if (indexplay == 0) {
+                    DemomethodSet.playvide(code);
+                } else {
+                    onwebControl.JS_HideWnd(); // 先让窗口隐藏，规避插件窗口滞后于浏览器消失问题
+                    onwebControl.JS_Disconnect().then(
+                        function () {
+                            // 断开与插件服务连接成功
+                            onwebControl = undefined;
+                            DemomethodSet.initPlugin(code, 0, "", "");
+                        },
+                        function () {
+                            // 断开与插件服务连接失败
+                        }
+                    );
+                }
+            } else {
+                DemomethodSet.initPlugin(code, 0, "", "");
+            }
+            indexplay = 0;
+        }
+
+
+        // 设置对象的隐藏
+        //selectObj.visible = !selectObj.visible;
+        //view3d.UpdateObjectVisible(selectObj.gid, selectObj.visible);
+        // gid: "Erqu"
+        let yinchang = ['Yiqu', 'Erqu', 'Sanqu', 'Siqu', 'Wuqu', 'Liuqu', 'Qiqu', 'Baqu', 'Jiuqu', 'Shiqu', 'Shiyiqu',
+            'Shierqu', 'Sinshiyuan', 'Huainianyuan', 'Changyiyuan', 'Wenxiuyuan', 'Mingciyuan', 'Jinghunyuan',
+            'Qianwangling',
+            'Zhuyiyuan', 'Qiaoqu', 'Puqiqu', 'Puliuqu', 'Songyiyuan', 'Puwuqu', 'Gupuliuqu', 'Gupuwuqu', 'Pusiqu',
+            'Gupusiqu', 'Guyiqu', 'Cuihuayuan', 'Pusanqu', 'Pusandanxuequ', 'Pusanshuangxuequ', 'Daguyouqu',
+            'Dagushuangxue',
+            'Qiaoyiqu', 'Shuangxuejiazuo', 'Gujiaqu', 'Gujiakanbizang', 'Yujingebizang', 'Guwuqu', 'Laoganbuqu',
+            'Lieshilingyuan', 'Cuiyiyuan', 'Shenchiyuan', 'Qiaosanqu', 'Guyierqu', 'Guyierkanbizang',
+            'Qiaoerqu', 'Xinshiyuan', 'Xinjinerqu', 'Tianchengqu', 'Gujiashuangxue', 'Shuangxuijiazuoqu'
+        ];
+
+        //进行隐藏-----------------------------------------------
+        function YC(obj) {
+            view3d.UpdateObjectVisibleByPrefix(obj, false)
+        }
+
+        // 批量隐藏的方法
+        // function PLYC() {
+        //     let yinchang2 = ['Yiqu', 'Erqu', 'Sanqu', 'Siqu', 'Wuqu', 'Liuqu', 'Qiqu', 'Baqu', 'Jiuqu', 'Shiqu', 'Shiyiqu', 'Shierqu', 'Sinshiyuan', 'Huainianyuan', 'Changyiyuan', 'Wenxiuyuan', 'Mingciyuan', 'Jinghunyuan', 'Qianwangling',
+        //         'Zhuyiyuan', 'Qiaoqu', 'Puqiqu', 'Puliuqu', 'Songyiyuan', 'Puwuqu', 'Gupuliuqu', 'Gupuwuqu', 'Pusiqu', 'Gupusiqu', 'Guyiqu', 'Cuihuayuan', 'Pusanqu', 'Pusandanxuequ', 'Pusanshuangxuequ', 'Daguyouqu', 'Dagushuangxue',
+        //         'Qiaoyiqu', 'Shuangxuejiazuo', 'Gujiaqu', 'Gujiakanbizang', 'Yujingebizang', 'Guwuqu', 'Laoganbuqu', 'Lieshilingyuan', 'Cuiyiyuan', 'Shenchiyuan', 'Qiaosanqu', 'Guyierqu', 'Guyierkanbizang',
+        //         'Qiaoerqu', 'Tianchenqu', 'Xinshiyuan', 'Xinjinerqu'];
+        //     for (let m = 0; m <= yinchang2.length; m++) {
+        //         view3d.UpdateObjectVisibleByPrefix(yinchang[m], false);
+        //     }
+        // }
+
+        function getNext() {
+            $('.leftm-top ul li').children('span').removeClass("selected2");
+            $('.leftm-top ul li').children('label').css('background', 'url(../img/qietu/sx.png) no-repeat');
+        }
+        function Flyposiyion() {
+            console.log(1);
+            view3d.FlyToObjectById('Gujiakanbizang', false, 53, 100, 5);
+            view3d.UpdateObjectVisibleByPrefix('Gujiakanbizang', true);
+            // view3d.FlyToPosition({ x: -7751, y: -1826, z: 1953, pitch: 34, roll: 0, yaw: -132 });
+            // view3d.FlyToPosition({ x: -31940, y: 16318, z: 5118, pitch: 0, roll: 0, yaw: 0 });
+        }
+
+        // 地图加载进行显示模型
+        const Common = {
+            //格式化坐标
+            filter(value) {
+                return value ? parseInt(value) : 0;
+            }
+        }
+
+        const Model = {
+            createModelSource(source, withPostfix = true, prefix = 'CAMERA_') {
+                return source.map(data => ({
+                    ...data,
+                    gid: prefix + data.category_id,
+                    filename: data.model_name
+                }))
+            },
+
+            // 图片图标
+            createModelConfig(data) {
+                let position = data.list_style ? data.list_style : data.center
+                return {
+                    gid: data.gid,
+                    type: 'model',
+                    filename: data.filename,
+                    radius: 1,
+                    scale: 1,
+                    attr: data.attr || data,
+                    onMouse: true,
+                    location: {
+                        x: Common.filter(position.x),
+                        y: Common.filter(position.y),
+                        z: Common.filter(position.z),
+                        pitch: Common.filter(position.pitch),
+                        yaw: Common.filter(position.yaw),
+                        roll: Common.filter(position.roll)
+                    }
+                }
+            },
+
+            /**
+             * 批量添加模型
+             * @param mapV   {Object}
+             * @param source {Array}
+             * @param size  {Number} 每次最多添加10个。不能再多。多了数据传输会失败。
+             * @param cb    {Function}
+             */
+
+            batchedAddModel(mapV, source, size = 10, cb) {
+                if (!Array.isArray(source)) {
+                    return
+                }
+                const sourceSize = source.length
+                const addModel = (startOffset, endOffset = 0) => {
+                    const sourceSlice = source.slice(startOffset, endOffset)
+                    if (startOffset > sourceSize - 1) {
+                        // const map = createMap.getMapView()
+                        console.log('batchedAddModel: ', startOffset, sourceSlice)
+                        // map.Stop()
+                        // map.Clear()
+                        setTimeout(() => {
+                            cb && cb()
+                        }, 20)
+                        return
+                    }
+                    console.log(sourceSlice);
+                    // 注意,此功能为异步操作
+                    setTimeout(() => {
+                        mapV.OverLayerCreateObjects(sourceSlice, res => {
+                            // mapV.OverLayerCreateObject(sourceSlice[0], res => {
+                            // console.log('OverLayerCreateObjects： ', sourceSize, startOffset, endOffset, size)
+                            // setTimeout(() => {
+                            if (startOffset < sourceSize) {
+                                addModel(endOffset, endOffset + size)
+                            }
+                            // }, 10)
+                        })
+                    }, 100)
+
+                }
+
+                addModel(0, size)
+            },
+
+            // 加载摄像头的杆子
+            createLiganSource(source, withPostfix = true, prefix = 'Ganzi_') {
+                return source.map(data => ({
+                    ...data,
+                    gid: prefix + data.category_id,
+                    filename: 'dg'
+                }))
+            },
+
+            // 图片图标
+            createLiganConfig(data) {
+                let position = data.list_style ? data.list_style : data.center
+                return {
+                    gid: data.gid,
+                    type: 'model',
+                    filename: data.filename,
+                    radius: 1,
+                    scale: 2,
+                    attr: data.attr || data,
+                    onMouse: true,
+                    location: {
+                        x: Common.filter(position.x),
+                        y: Common.filter(position.y),
+                        z: Common.filter(position.z) - 480,
+                        pitch: 0,
+                        yaw: 0,
+                        roll: 0
+                    }
+                }
+            },
+
+            /**
+             * 批量添加模型
+             * @param mapV   {Object}
+             * @param source {Array}
+             * @param size  {Number} 每次最多添加10个。不能再多。多了数据传输会失败。
+             * @param cb    {Function}
+             */
+
+            batchedAddLiganModel(mapV, source, size = 10, cb) {
+                if (!Array.isArray(source)) {
+                    return
+                }
+                const sourceSize = source.length
+                const addModel = (startOffset, endOffset = 0) => {
+                    const sourceSlice = source.slice(startOffset, endOffset)
+                    if (startOffset > sourceSize - 1) {
+                        // const map = createMap.getMapView()
+                        console.log('batchedAddModel: ', startOffset, sourceSlice)
+                        // map.Stop()
+                        // map.Clear()
+                        setTimeout(() => {
+                            cb && cb()
+                        }, 20)
+                        return
+                    }
+                    console.log(sourceSlice);
+                    // 注意,此功能为异步操作
+                    setTimeout(() => {
+                        mapV.OverLayerCreateObjects(sourceSlice, res => {
+                            // mapV.OverLayerCreateObject(sourceSlice[0], res => {
+                            // console.log('OverLayerCreateObjects： ', sourceSize, startOffset, endOffset, size)
+                            // setTimeout(() => {
+                            if (startOffset < sourceSize) {
+                                addModel(endOffset, endOffset + size)
+                            }
+                            // }, 10)
+                        })
+                    }, 1000)
+
+                }
+
+                addModel(0, size)
+            },
+
+
+        }
+
+        //点击获取坐标值
+        function getCoords() {
+            // console.log("获取坐标值");
+            // 过滤 对象  prefix 对象名称前缀   ，path 路径前缀
+            let paramers = {
+                prefix: '*',//MP,TEMP,JZ,V
+                path: '',
+                speedroute: 10,
+                max_distance: 1000000, // 1万米，最远缩放距离
+                unit: 'cm' // 场景返回数据单位， 默认厘米   输入m返回为米   其他值为厘米
+            };
+
+            view3d.SetParameters(paramers);
+
+            setTimeout(() => {
+                view3d.SetMousePositionCallback(res => {
+                    let strObj = JSON.parse(JSON.stringify(res));
+                    console.log(strObj);
+                });
+
+            }, 1000);
+
+        }
+
+        function preParseJSONString(problemStr) {
+
+            let JSONString = problemStr.replace('\\', '')
+            JSONString = JSONString.slice(1, JSONString.length)
+            JSONString = JSONString.slice(0, JSONString.length - 1)
+            return JSONString
+
+        }
+
+        function formatJSON(str) {
+            return str
+                .replace(/[\s\t]*/g, '')
+                .replace(/\\r/g, '').replace(/\\n/g, '').replace(/\r/g, '')
+                .replace(/\n/g, '').replace(/\\"/g, "\"")
+                .replace(/"{/g, "{").replace(/}"/g, "}")
+                .replace(/null/g, '\'\'')
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+1.For Windows:
+
+Using parts of the 7-Zip program:
+7za.exe
+
+Source code of binaries can be found at:
+http://www.7-zip.org/
+
+2.For Linux:
+Using parts of the 7-Zip program:
+7za
+
+Source code of binaries can be found at:
+http://www.7-zip.org/
+http://sourceforge.net/projects/p7zip/

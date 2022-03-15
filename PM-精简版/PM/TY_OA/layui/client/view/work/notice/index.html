@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>消息通知</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <form class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-search-label">创建人</label>
+                            <div class="layui-input-inline">
+                                <input name="creater_name" placeholder="请输入创建人姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">创建时间</label>
+                            <div class="layui-input-inline">
+                                <input name="start_time" autocomplete="off" placeholder="请选择起始日期" readonly
+                                    class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">
+                                -
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="end_time" autocomplete="off" placeholder="请选择结束日期" readonly
+                                    class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">消息内容</label>
+                            <div class="layui-input-inline">
+                                <input name="message" placeholder="请输入消息内容" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" lay-submit lay-filter="LAY-notice-search">搜索</button>
+                            <button class="layui-btn" type="reset" lay-submit lay-filter="LAY-notice-reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+                <table id="LAY-notice-manage" lay-filter="LAY-notice-manage"></table>
+                <script type="text/html" id="tool">
+                    {{# if(d.type === "project") { }}
+                        <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">详情信息</button>
+                    {{# } else if(d.type === "dynamic") { }}
+                        <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">详情信息</button>
+                    {{# } else if(d.type === "addenda") { }}
+                        <button class="layui-btn layui-btn-xs layui-btn-checked" lay-event="addenda">详情信息</button>
+                    {{# } else if(d.type === "feedback") { }}
+                    <!-- 遍历方案人员 -->
+                    {{#     var ishave = false, number = 0; }}
+                    {{#     layui.each(d.examine, function(index, item) { }}
+                    {{#         if(item.solution) { }}
+                    {{#             number++ }}
+                    {{#         } }}
+                    {{#     }); }}
+                    {{#     if(number === d.examine.length) { }}
+                                <button class="layui-btn layui-btn-xs layui-btn-primary" lay-event="solution">解决方案</button>
+                    {{#     } else { }}
+                                <button class="layui-btn layui-btn-xs layui-btn-disabled">解决方案</button>
+                    {{#     } }}
+                    {{# } }}        
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

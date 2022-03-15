@@ -1,0 +1,28 @@
+html,body,#root{
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+      user-select:none;
+      background-color: #07163D;
+}
+ul,li{
+    padding:0;
+    margin:0;
+    list-style:none;
+}
+
+i{
+    font-style:normal;
+}
+@font-face {
+    font-family:fontf1;
+    src: url('./assets/font_family/SHISHANGZHONGHEIJIANTI.TTF');
+}
+/* 组件进场速度 */
+.animate_speed{
+    animation-delay:-.2s;
+}
+#streamingVideo{
+    height: 100%;
+}

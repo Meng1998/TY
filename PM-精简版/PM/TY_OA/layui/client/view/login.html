@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <link rel="icon" href="../favicon.ico">
+    <title>项目管理系统——系统登录</title>
+
+    <script type="text/javascript" src="../lib/include-lib.js?version=202102150234" libpath="../" include="layui"></script>
+    <link rel="stylesheet" href="../style/admin.css?version=202102150234" media="all">
+    <link rel="stylesheet" href="../style/login.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layadmin-user-login-container">
+        <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login">
+            <div class="layadmin-user-login-main">
+                <div class="layadmin-user-login-box layadmin-user-login-header">
+                    <h2>后台管理系统</h2>
+                    <p>杭州图洋信息科技有限公司</p>
+                </div>
+                <div class="layadmin-user-login-box layadmin-user-login-body layui-form"
+                    lay-filter="LAY-user-login-form">
+                    <input name="captcha_ident" style="display: none;">
+                    <div class="layui-form-item">
+                        <label class="layadmin-user-login-icon layui-icon layui-icon-username"
+                            for="LAY-user-login-username"></label>
+                        <input type="text" name="user_name" placeholder="请输入用户名" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layadmin-user-login-icon layui-icon layui-icon-password"
+                            for="LAY-user-login-password"></label>
+                        <input type="password" name="user_pwd" placeholder="请输入密码"
+                            class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-row">
+                            <div class="layui-col-xs7">
+                                <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"
+                                    for="LAY-user-login-vercode"></label>
+                                <input type="text" name="captcha_code" id="LAY-user-login-vercode" 
+                                    placeholder="请输入验证码" class="layui-input">
+                            </div>
+                            <div class="layui-col-xs5">
+                                <div class="layadmin-user-login-codeimg"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+                        <a href="javascript:void(0);" class="layadmin-user-jump-change layadmin-link layadmin-user-login-forget"
+                            style="margin-top: 7px;">忘记密码？</a>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登
+                            入</button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-trans layadmin-user-login-footer">
+                <p>Copyright © 2020 杭州图洋信息科技有限公司</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

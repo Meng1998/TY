@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>项目补充</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../" include="layui"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        .addenda {
+            height: 518px;
+        }
+
+        .addenda_selected {
+            background-color: #d9fafe;
+            border: 1px solid #aaa;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs6">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <input id="project_id" name="project_id" style="display:none;" />
+                        <input id="project_name" name="project_name" style="display:none;" />
+                        <table id="LAY-addenda-manage" lay-filter="LAY-addenda-manage"></table>
+                        <script type="text/html" id="toolbar">
+                            <div class="layui-btn-container">
+                                <button class="layui-btn layui-btn-sm" lay-event="add">添加补充</button> 
+                                <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="delete">删除补充</button> 
+                            </div>
+                        </script>
+                        <script type="text/html" id="important-tool">
+                            <input type="checkbox" title="重点关注" lay-filter="important" value="{{ d.id }}" {{d.important === 1 ? "checked" : ""}} />
+                        </script>
+                        <script type="text/html" id="tool">
+                            <button class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete">删除</button>
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs6">
+                <div class="layui-card">
+                    <div class="layui-card-body addenda" style="overflow: auto;">
+                        <ul id="addenda-timeline" class="layui-timeline">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

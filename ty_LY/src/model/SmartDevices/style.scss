@@ -1,0 +1,72 @@
+@mixin scrollBarStyle() {
+  &::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+  }
+  &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 5px #9b9ba3;
+      background: rgba(152, 155, 163, 0.5);
+  }
+}
+  .CenImg{
+    position: fixed;
+    top: 105px;
+    right: 15px;
+    z-index: 5;
+    pointer-events:fill;
+}
+.ListInfo{
+  position: fixed;
+  top: 100px;
+  right:100px;
+  width: 585px;
+  height: 210px;
+  border: 1px solid rgb(51,82,132);
+  z-index: 2;
+  .CompletedSmart-Tab{
+    pointer-events: auto;
+    background: #03235B;
+      // width: 448px;
+      width: 96%;
+      height: 190px;
+      margin: 10px auto;
+      overflow: auto;
+      @include scrollBarStyle;
+      // &::-webkit-scrollbar{width:3px;height:5px;border-radius: 5px;}
+      // &::-webkit-scrollbar-track{background-color: transparent;border-radius: 5px;height: 260px;}
+      // &::-webkit-scrollbar-thumb{background: #081932;border-radius: 5px;}
+      // &::-webkit-scrollbar-thumb:hover{background: #081932;}
+      li{ 
+          font-size: 17px;
+          height: 25px;
+          line-height: 25px;
+          background-color: #3a64a8;
+          margin-bottom: 3px;
+          display: flex;
+          span{
+            width: 20%;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+          }
+          // span:nth-child(2){
+          //     width: 80%;
+          //       text-align: center;
+          //   }
+      }
+      .Cljbj{
+          color: blue;
+      }
+      .Tab-Th{
+          background-color: rgba(145, 147, 150, 0.1);
+      }
+  }
+  .faceminclose{
+      color: white;
+      float: right;
+      margin-right: 12PX;
+      margin-top: 5px;
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>角色信息</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        .hn-input-icon i {
+            position: absolute;
+            right: 12px;
+            cursor: pointer;
+            top: 19%;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" lay-filter="LAY-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">功能名称</label>
+                    <div class="layui-input-block">
+                        <input name="id" style="display: none;">
+                        <input name="action_name" autocomplete="off" placeholder="请输入功能名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">功能标题</label>
+                    <div class="layui-input-block">
+                        <input name="action_title" autocomplete="off" placeholder="请输入功能标题" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上级菜单</label>
+                    <div class="layui-input-block">
+                        <input id="action_parent" name="action_parent" lay-filter="LAY-tree-action" autocomplete="off"
+                            placeholder="请选择上级菜单" readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">功能目标</label>
+                    <div class="layui-input-block">
+                        <input name="action_intent" autocomplete="off" placeholder="请输入功能目标" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">图标</label>
+                    <div class="layui-input-block">
+                        <div class="hn-input-icon">
+                            <input name="action_icon" autocomplete="off" placeholder="选择图标" class="layui-input">
+                            <i class="layui-icon layui-icon-search"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">启用状态</label>
+                    <div class="layui-input-block">
+                        <select name="action_enable" autocomplete="off" placeholder="请选择学历"
+                            class="layui-input"></select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">排序号</label>
+                    <div class="layui-input-block">
+                        <input verify="number" name="order" autocomplete="off" placeholder="请输入排序号" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">功能标识</label>
+                    <div class="layui-input-block">
+                        <input name="ident" autocomplete="off" placeholder="请输入功能标识" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

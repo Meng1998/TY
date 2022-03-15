@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<title>mapvision view3d api demo </title>
+
+        <script type="text/javascript" src="../js/mapvision3d.min.js"></script>
+
+		<style>
+			body.hide:before,
+			body.hide .begin {
+				display: none;
+			}
+			.btn {
+				position: fixed;
+				right: 20px;
+				top: 20px;
+				color: #fff;
+				background: #0a8;
+				border: none;
+				padding: 8px 10px;
+				line-height: 1;
+				outline: none;
+				font-size: 14px;
+				cursor: pointer;
+				z-index: 100;
+				/* display: none; */
+			}
+			.btn2 {
+				top: 60px;
+			}
+
+			.btn3 {
+				top: 100px;
+			}
+			.btn4 {
+				top: 140px;
+			}
+			.btn5 {
+				top: 180px;
+			}
+			.btn6 {
+				top: 220px;
+			}
+			.btn7 {
+				top: 260px;
+			}
+			.btn:hover {
+				background: #0c8;
+			}
+
+			
+			/* 自定义云渲染DOM, video 大小 位置 */
+			#mapvision3d {
+				position: fixed;
+				left: 0 !important;
+				top: 0 !important;
+				width: 100vw !important;
+				height: 100vh !important;
+				z-index: 1;
+				background: #000;
+			}
+	
+			#mapvision3d video {
+				display: block;
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100vw;
+				height: 100vh;
+				object-fit: fill;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="mapvision3d"></div>
+		<div class="btn" onclick="btn1Click()">连接云服务</div>
+		<div class="btn btn2" onclick="btn2Click()">选择对象</div>
+		<div class="btn btn3" onclick="btn3Click()">更新选中的对象样式1</div>
+		<div class="btn btn4" onclick="btn4Click()">更新选中的对象样式2</div>
+		<div class="btn btn5" onclick="btn5Click()">显示/隐藏对象</div>
+		<div class="btn btn6" onclick="btn6Click()">批量显示/隐藏对象</div>
+		<div class="btn btn7" onclick="btn7Click()">清除样式</div>
+		<script>
+			"use strict";
+
+			var view3d = new MapVision.View3d({
+					id: 'mapvision3d',
+					url: 'http://192.168.0.80:9901/aimapvision3d',
+					projectId: 'ca86445c3034405d994d7a6596607937',
+					token: '8cff62bf12288d9ccadd7e6753b86a48'
+				});
+
+			var selectObj = null;
+			/*
+			** 打开连接
+			*/
+			function btn1Click() {
+				view3d.Open();
+			}
+			/*
+			** 开始选择对象
+			*/
+			function btn2Click() {
+				// 过滤 对象  prefix 对象名称前缀   ，path 路径前缀
+				var paramers = {
+					prefix: 'MB',
+					path: '',
+					speedroute: 10
+				};
+
+				// paramers = {
+				// 	prefix: '',
+				// 	path: 'JK',
+				// 	speedroute: 10
+				// }
+				view3d.SetParameters(paramers);
+
+				view3d.SetMouseCallback(res => {
+					selectObj = res;
+					var strObj = JSON.stringify(res);
+					console.log(strObj);
+					// alert(strObj);
+				});
+			}
+
+			function btn3Click() {
+				if(!selectObj){
+					alert('please select object!');
+					return;
+				}
+
+				// default, red, yellow,  orange
+				selectObj.style = 'red';
+
+				view3d.UpdateObject(selectObj);
+			}
+
+			function btn4Click() {
+				if(!selectObj){
+					alert('please select object!');
+					return;
+				}
+
+				view3d.UpdateObjectStyle(selectObj.gid, 'green');
+			}
+			function btn5Click() {
+				if(!selectObj){
+					alert('please select object!');
+					return;
+				}
+
+				selectObj.visible = !selectObj.visible;
+
+				view3d.UpdateObjectVisible(selectObj.gid, selectObj.visible);
+			}
+
+			var gvisible = true;
+			function btn6Click() {
+				// var gids = ['Plane1', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2', 'Plane2'];
+				// view3d.UpdateObjectVisibleByIds(gids, selectObj.visible);
+				gvisible = !gvisible;
+				view3d.UpdateObjectVisibleByPrefix('Plane', gvisible);
+			}
+			function btn7Click() {
+				view3d.ClearObjectStyle();
+			}
+		</script>
+	</body>
+</html>

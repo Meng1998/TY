@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>部门信息</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" lay-filter="LAY-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">请假人</label>
+                    <div class="layui-input-block">
+                        <input name="user_id" style="display: none;">
+                        <input name="user_name" autocomplete="off" readonly class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">请假类型</label>
+                    <div class="layui-input-block">
+                        <select name="type" autocomplete="off" placeholder="请选择请假类型" class="layui-input"></select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">请假原因</label>
+                    <div class="layui-input-block">
+                        <textarea name="excues" placeholder="请输入请假原因" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-top:7.5px">请假日期</label>
+                    <div class="layui-input-block layui-col-space15">
+                        <div class="layui-col-xs6" style="padding-left: 0px">
+                            <input name="start_time" autocomplete="off" placeholder="请选择起始日期" readonly
+                                class="layui-input">
+                        </div>
+                        <div class="layui-col-xs6" style="padding-left: 0px">
+                            <input name="end_time" autocomplete="off" placeholder="请选择结束日期" readonly
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

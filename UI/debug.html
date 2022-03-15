@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>mapvision view3d api demo</title>
+
+    <script src="./js/dist/Shapefile.js"></script>
+    <script type="text/javascript" src="./js/mapvision3d.min.js"></script>
+    <style>
+      body.hide:before,
+      body.hide .begin {
+        display: none;
+      }
+      .btn {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        color: #fff;
+        background: #0a8;
+        border: none;
+        padding: 8px 10px;
+        line-height: 1;
+        outline: none;
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 100;
+        /* display: none; */
+      }
+
+      .panel {
+        right: auto;
+        left: 0px;
+        top: auto;
+        bottom: 20px;
+        width: 100%;
+        height: 100px;
+        color: #fff;
+        background: #0a8;
+      }
+      .btn2 {
+        top: 60px;
+      }
+      .btn3 {
+        top: 100px;
+      }
+      .btn4 {
+        top: 140px;
+      }
+      .btn5 {
+        top: 180px;
+      }
+      .btn6 {
+        top: 220px;
+      }
+      .btn7 {
+        top: 260px;
+      }
+      .btn8 {
+        top: 300px;
+      }
+
+      .btn:hover {
+        background: #0c8;
+      }
+
+      /* 自定义云渲染DOM, video 大小 位置 */
+      #mapvision3d {
+        position: fixed;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 1;
+        background: #000;
+      }
+
+      #mapvision3d video {
+        display: block;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: fill;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="mapvision3d"></div>
+    <div class="btn" onclick="btn1Click()">连接云服务</div>
+    <div class="btn btn2" onclick="btn2Click()">创建线对象</div>
+    <div class="btn btn3" onclick="btn3Click()">修改线对象</div>
+    <div class="btn btn4" onclick="btn6Click()">删除对象</div>
+    <div class="btn btn5" onclick="btn7Click()">删除对象ID</div>
+    <div class="btn btn6" onclick="btn8Click()">清除所有</div>
+    <script>
+      "use strict";
+
+      var view3d = new MapVision.View3d({
+        id: "mapvision3d",
+        url: "http://192.168.0.178:10121", //token: 'b36359a05d7c10ec033a1c26ec40bfc5'
+        // url: 'http://127.0.0.1:9906',
+        //url:'http://192.0.1.252:9911',
+        // projectId: 'db223688751242659ef5c822fe3ac0c1',
+        projectId: "d47e9be6766641ac9c20982dbbe96969",
+        token: "ff1df144d86a8247141f7526aae452a1",
+      });
+
+      var list = [];
+      var i = 0;
+      var createObj = null; // 创建的对象
+      /*
+       ** 打开连接
+       */
+      function btn1Click() {
+        view3d.Open((res) => {
+          // res = 'connected'
+          console.log("MapVision View3d " + res);
+        });
+        shapefile
+          .open("http://127.0.0.1:5502/CG/arc.shp")
+          .then((source) =>
+            source.read().then(function log(result) {
+              if (result.done) return;
+              //console.log(result.value.geometry.coordinates );
+
+              result.value.geometry.coordinates.forEach((element) => {
+                if (i < 100) {
+                  list[i] = { x: element[0], y: element[1], z: 1332.5 };
+                  i++;
+                }
+                console.log("List" + element);
+              });
+              return source.read().then(log);
+            })
+          )
+          .catch((error) => console.log(error.stack));
+      }
+      /*
+       ** 创建对象
+       */
+      function btn2Click() {
+        console.log("i:" + i);
+        console.log(list);
+        // 注意,此功能为异步操作
+        const obj = {
+          // gid: 'CUSTOM_ID', // 自定义gid，可以设置自定义前缀，用于点选匹配不同的对象
+          type: "linestring",
+          style: "red",
+          // color: '#FF0000',
+          linewidth: 20.0,
+          points: list,
+        };
+        view3d.OverLayerCreateObject(obj, (res) => {
+          createObj = res;
+          var strObj = JSON.stringify(createObj);
+          console.log(strObj);
+        });
+        const pos = {
+          x: list[1].x,
+          y: list[1].y,
+          z: list[1].z,
+          pitch: 90, // 俯仰角 0——90度
+          yaw: 0, // 偏航角 0-360度
+          roll: 0, // 翻滚角
+        };
+        const speed = 40.0;
+        const showLocation = false; // 设置显示位置点图标
+
+        view3d.FlyToPosition(pos, showLocation, speed); //
+      }
+
+      function btn3Click() {
+        let paramers = {
+          prefix: "*", //MP,TEMP,JZ,V
+          path: "",
+          // unit: 'm', // 场景返回数据单位， 默认厘米   输入m返回为米   其他值为厘米
+          speedroute: 10,
+        };
+        view3d.SetParameters(paramers);
+        // view3d.SetResolution(1920, 1080); //点击设置分辨率
+        view3d.SetMouseCallback((res) => {
+          console.log(res);
+        });
+      }
+
+      function btn7Click() {
+        function makeAdder(x) {
+          return function (y) {
+            return x + y;
+          };
+        }
+
+        var add5 = makeAdder(5);
+        var add10 = makeAdder(10);
+		console.log(add5())
+		console.log(add10())
+      }
+
+      function btn8Click() {
+        var time = new Date();
+        console.log(time.toLocaleString());
+        console.log(getNowFormatDate(10000));
+        //console.log(reduceTwoS(getNowFormatDate()));
+
+        //view3d.OverLayerRemoveAll();
+      }
+      function getNowFormatDate(a) {
+        //var dt=new Date(dateStr.replace(/-/,"/"));
+        var date = new Date(new Date().getTime() - a);
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+          month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+        }
+        var currentdate =
+          date.getFullYear() +
+          seperator1 +
+          month +
+          seperator1 +
+          strDate +
+          " " +
+          date.getHours() +
+          seperator2 +
+          date.getMinutes() +
+          seperator2 +
+          date.getSeconds(a);
+        return currentdate;
+      }
+
+      function reduceTwoS(dateStr) {
+        //dateStr格式为yyyy-mm-dd hh:mm:ss
+        var dt = new Date(dateStr.replace(/-/, "/")); //将传入的日期格式的字符串转换为date对象 兼容ie
+        // var dt=new Date(dateStr);//将传入的日期格式的字符串转换为date对象 非ie
+        var ndt = new Date(dt.getTime() - 5000); //将转换之后的时间减去两秒
+        var result = {
+          year: parseInt(ndt.getFullYear()),
+          month: parseInt(ndt.getMonth() + 1),
+          day: parseInt(ndt.getDate()),
+          hour: parseInt(ndt.getHours()),
+          minute: parseInt(ndt.getMinutes()),
+          second: parseInt(ndt.getSeconds()),
+        };
+        return result;
+      }
+    </script>
+  </body>
+</html>

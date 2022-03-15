@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>个人资料</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        .user-info-head {
+            width: 128px;
+            height: 128px;
+            line-height: 128px;
+            position: relative;
+            display: inline-block;
+            border: 2px solid #eee;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            margin-top: 50px;
+        }
+
+        .user-info-head:hover:after {
+            display: none;
+            content: '\e681';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.3);
+            font-size: 28px;
+            padding-top: 2px;
+            font-style: normal;
+            font-family: layui-icon;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs5">
+                <div class="layui-card">
+                    <div class="layui-card-body" style="height: 636px;">
+                        <div class="text-center layui-text">
+                            <div class="user-info-head" id="userInfoHead">
+                                <img id="head_img" src="../../../img/head.png" style="width: 100%; height: 100%;">
+                            </div>
+                            <h2 id="full_name" style="padding-top: 30px;"></h2>
+                        </div>
+                        <div class="layui-text" style="padding-top: 30px;">
+                            <div class="user-info-list-item">
+                                <i class="layui-icon layui-icon-user" style="font-size:16px;">
+                                    <span style="font-size:14px;">&nbsp;登录账号：</span>
+                                </i>
+                                <span id="user_name" style="font-size:14px;"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <i class="fa fa-sitemap" style="font-size:16px;">
+                                    <span style="font-size:14px;">&nbsp;所属部门：</span>
+                                </i>
+                                <span id="dept_name" style="font-size:14px;"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <i class="layui-icon layui-icon-share" style="font-size:16px;">
+                                    <span style="font-size:14px;">&nbsp;用户角色：</span>
+                                </i>
+                                <span id="role_name" style="font-size:14px;"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="layui-text">
+                            <div class="user-info-list-item">
+                                <i class="fa fa-calendar" style="font-size:16px;">
+                                    <span style="font-size:14px;">&nbsp;入职时间：</span>
+                                </i>
+                                <span id="entry_time" style="font-size:14px;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs7">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <form class="layui-form" lay-filter="LAY-form">
+                            <input name="id" style="display: none;">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">联系电话</label>
+                                <div class="layui-input-block">
+                                    <input name="user_tel" autocomplete="off" placeholder="请输入联系电话" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">紧急联系人</label>
+                                <div class="layui-input-block">
+                                    <input name="emergency_contacts" autocomplete="off" placeholder="请输入紧急联系人"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">联系人电话</label>
+                                <div class="layui-input-block">
+                                    <input name="emergency_tel" autocomplete="off" placeholder="请输入联系人电话"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">邮箱</label>
+                                <div class="layui-input-block">
+                                    <input name="user_email" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">QQ</label>
+                                <div class="layui-input-block">
+                                    <input name="user_qq" autocomplete="off" placeholder="请输入QQ" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">微信</label>
+                                <div class="layui-input-block">
+                                    <input name="user_wechat" autocomplete="off" placeholder="请输入微信"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">身份证</label>
+                                <div class="layui-input-block">
+                                    <input name="identity_card" autocomplete="off" placeholder="请输入身份证"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">籍贯</label>
+                                <div class="layui-input-block">
+                                    <input name="native_place" autocomplete="off" placeholder="请选择籍贯"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">生日</label>
+                                <div class="layui-input-block">
+                                    <input name="birthday" autocomplete="off" placeholder="请输入生日" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">毕业院校</label>
+                                <div class="layui-input-block">
+                                    <input name="university" autocomplete="off" placeholder="请输入毕业院校"
+                                        class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">专业</label>
+                                <div class="layui-input-block">
+                                    <input name="speciality" autocomplete="off" placeholder="请输入专业" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">学历</label>
+                                <div class="layui-input-block">
+                                    <select name="education" autocomplete="off" placeholder="请选择学历"
+                                        class="layui-input"></select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

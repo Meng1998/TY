@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>差旅外勤</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <form class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-search-label">外勤人员</label>
+                            <div class="layui-input-inline">
+                                <input name="user_name" placeholder="请输入外勤人员姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">外勤类型</label>
+                            <div class="layui-input-inline">
+                                <select name="type" placeholder="请选择外勤类型" autocomplete="off" class="layui-input">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">外勤日期</label>
+                            <div class="layui-input-inline">
+                                <input name="start_time" autocomplete="off" placeholder="请选择起始日期" readonly
+                                    class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">
+                                -
+                            </div>
+                            <div class="layui-input-inline">
+                                <input name="end_time" autocomplete="off" placeholder="请选择结束日期" readonly
+                                    class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" lay-submit lay-filter="LAY-bustrip-search">搜索</button>
+                            <button class="layui-btn" type="reset" lay-submit lay-filter="LAY-bustrip-reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+                <table id="LAY-bustrip-manage" lay-filter="LAY-bustrip-manage"></table>
+                <script type="text/html" id="toolbar">
+                    <div class="layui-btn-container"> 
+                        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="cost">差旅费用</button>
+                    </div>
+                </script>
+                <script type="text/html" id="tool">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="cost">差旅费用</button> 
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

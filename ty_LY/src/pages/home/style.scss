@@ -1,0 +1,73 @@
+.homeconent{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    i{
+        font-style:normal
+    }
+    .conent{
+        position: fixed;
+        width: 100vw ;
+        height: 93% ;
+        z-index: 1;
+        // pointer-events: visible;
+        .Databack{
+            z-index: 1;
+            width: 830px;
+            height: 972px;
+            background: url("../../assets/images/databj1.png") no-repeat top;
+            background-size: cover;
+            .title{
+                display: flex;
+                justify-content: center;
+                margin-top: 22px;
+            }
+        }
+     
+        .ceamraNodelist{
+            position: absolute;
+            top: 100px;
+            right: 60px;
+            width: 150px;
+            height: 200px;
+            background-color: #03235B;
+            opacity: 0.9;
+            border-radius: 20px;
+            font-size: 13px;
+            z-index: 5;
+            color: white;
+            //display: flex;
+           
+            li{
+                padding-left: 15px;
+                margin-bottom: 10px;
+                width: 100%;
+                height: 15px;
+            }
+            .cameralist:hover{
+                width: 90%;
+                background-color: rgba(155,249,249,0.5);
+                // background-color: #03235B;
+                color: #03235B;
+            }
+            li:nth-child(1){
+                text-align: center;
+                font-size: 15px;
+                padding-left: 0;
+                color: white;
+                margin-top: 5px;
+                margin-bottom: 10px;
+                border-bottom: 3px solid #3A64A8;
+                padding-bottom: 14px;
+            }
+            li:nth-child(2),li:nth-child(3),li:nth-child(4){
+                padding-left: 15px;
+                padding: 3px 3px 3px 15px;
+            }
+        }
+       
+        
+    }
+    
+
+}

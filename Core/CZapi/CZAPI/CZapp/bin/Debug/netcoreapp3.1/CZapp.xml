@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CZapp</name>
+    </assembly>
+    <members>
+        <member name="M:CZapp.Controllers.MapImgController.GetImg(System.String)">
+            <summary>
+            查询监控图像
+            </summary>
+            <param name="devicecode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.Controllers.MapImgController.ImgDataWarehousing">
+            <summary>
+            图像数据入库
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.Controllers.MapImgController.CaptureSearch(CZapp.model.Captureface)">
+            <summary>
+            以图搜图
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:CZapp.Controllers.MapImgController.Hiktest(System.Int32)">
+            <summary>
+            返回Hik请求信息
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:CZapp.Controllers.MapImgController.HikISCrequestInfo(CZapp.model.Infolist)">
+            <summary>
+            ISC动态请求传ID
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:CZapp.Controllers.MapImgController.HikISCrequestAddress(CZapp.model.addlist)">
+            <summary>
+            ISC动态请求传地址
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:CZapp.C.Hik.Encryption.CreateToken(System.String,System.String)">
+            <summary>
+            HMACSHA256 =》 Base64
+            </summary>
+            <param name="message">内容</param>
+            <param name="secret">秘钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.Encryption.InitRestart">
+            <summary>
+            设置程序重启
+            </summary>
+        </member>
+        <member name="M:CZapp.C.Hik.Encryption.Restart(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            重启自己
+            </summary>
+        </member>
+        <member name="M:CZapp.C.Hik.Encryption.CreateBase64(System.String)">
+            <summary>
+            Base64
+            </summary>
+            <param name="message">内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.Encryption.MD5Encrypt(System.String)">
+            <summary>
+            用MD5加密字符串
+            </summary>
+            <param name="password">待加密的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="T:CZapp.C.Hik.GetDataSet">
+            <summary>
+            集合工具类 对ISC接口操作
+            </summary>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.InitParameters">
+            <summary>
+            初始化参数
+            </summary>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.KEY(System.Int32)">
+            <summary>
+            获取ISC密钥
+            </summary>
+            <param name="type">获取类型 0是ISC，1是SPCC</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.StitchingParameters(CZapp.model.SecretKey)">
+            <summary>
+            返回链接字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.GetISCkey(System.Int32,System.Int32)">
+            <summary>
+            获取ISC密钥
+            </summary>
+            <param name="index">获取什么接口的</param>
+            <param name="type">获取的数据类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.GetmsgSuccessfulState(System.String)">
+            <summary>
+            海康接口返回状态是否正确
+            </summary>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.GetencryptionKey(CZapp.model.SecretKey)">
+            <summary>
+            获取加密密钥
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.EncryptionPostData(System.String,System.String,System.String,System.String)">
+            <summary>
+            取到加密秘钥字段
+            </summary>
+            <param name="Key">AppKey</param>
+            <param name="ApiUrl">Api的连接</param>
+            <param name="appSecret">appSecret</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.GetDataSet.CreateToken(System.String,System.String)">
+            <summary>
+            HMACSHA256 =》 Base64
+            </summary>
+            <param name="message">内容</param>
+            <param name="secret">秘钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.HIKoperation.HIKGETDATA(Newtonsoft.Json.Linq.JToken,System.Int32,System.Int32)">
+            <summary>
+            综合数据获取方法(异步)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.HIKoperation.HIKGETDATA(Newtonsoft.Json.Linq.JToken,System.Boolean@,System.Int32,System.Int32)">
+            <summary>
+            综合数据获取方法(同步)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.HIKoperation.HIKTeststr(System.Int32,System.Int32)">
+            <summary>
+            综合数据获取方法(同步)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.HIKoperation.HiktrendsGet(Newtonsoft.Json.Linq.JToken,System.Boolean@,System.Int32,System.Int32)">
+            <summary>
+            综合数据获取方法(同步)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.operationKey.GetKeyHttpPostRaw(System.String,CZapp.model.SecretKey,Newtonsoft.Json.Linq.JToken,System.Boolean@,System.Int32)">
+            <summary>
+            对key操作
+            </summary>
+            <param name="Url"></param>
+            <param name="key"></param>
+            <param name="Parameter"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.operationKey.GetKeyHttpPostRaw(System.String,CZapp.model.SecretKey,System.String,System.Boolean@,System.Int32)">
+            <summary>
+            对key操作
+            </summary>
+            <param name="Url"></param>
+            <param name="key"></param>
+            <param name="Parameter"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.operationKey.ToGMTString(System.DateTime)">
+            <summary>  
+            本地时间转成GMT时间  
+            </summary>  
+        </member>
+        <member name="M:CZapp.C.Hik.Post.HIKHttpPostRaw(System.String,System.String,System.String,System.String,System.String,System.Boolean@)">
+            <summary>
+            POST整个字符串到URL地址中
+            </summary>
+            <param name="Url">Post链接地址</param>
+            <param name="jsonParas">json数据</param>
+            <param name="TimeStr">当前系统时间(GMT格式)</param>
+            <param name="EncryptionKey">签名</param>
+            <param name="AK">APPkey(AK秘钥)</param>
+            <param name="isSuccess">方法是否正确拿到数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.C.Hik.Post.StreamToBytes(System.IO.Stream)">
+            <summary> 
+            将 Stream 转成 byte[] 
+            </summary> 
+        </member>
+        <member name="T:CZapp.C.Hik.TestInterface">
+            <summary>
+            测试海康接口状态是否正常
+            </summary>
+        </member>
+        <member name="M:CZapp.Drt.Directoryfile.ImageToBase64(System.String)">
+            <summary>
+            Image 转成 base64
+            </summary>
+            <param name="fileFullName"></param>
+        </member>
+        <member name="M:CZapp.Drt.Pgsql.ExecuteSQL(System.String)">
+            <summary>
+            增 删 改（无参数）
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CZapp.Drt.myExtendLine2D.IntersecWithSegmentLine(MathNet.Spatial.Euclidean.Line2D,MathNet.Spatial.Euclidean.Line2D)">
+            <summary>
+            判断两个线段（不延长）之间是否相交，如果相交给出相交的点。（使用了MathNet.Spatial库，来自NuGet）
+            </summary>
+            <param name="segmentline1"></param>
+            <param name="segmentline2"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

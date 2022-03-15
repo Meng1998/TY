@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .selected2 {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <ul>
+        <li>
+            <span>1</span>
+        </li>
+        <li> <span>1</span></li>
+        <li> <span>1</span></li>
+        <li> <span>1</span></li>
+        <li> <span>1</span></li>
+    </ul>
+</body>
+<!-- 
+    $('.leftm-top ul').on('click', "li", function () {
+
+        $(this).children('span').addClass("selected2").parent()
+        .siblings().children('span').removeClass("selected2");
+
+        $(this).children('label').css('background', 'url(../img/qietu/sx1.png) no-repeat')
+        .parent().siblings().children('label').css('background', 'url(../img/qietu/sx.png) no-repeat')
+        }) 
+-->
+
+</html>
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script>
+    $('ul li').children('span').addClass("selected2");
+    $('ul li').children('span').addClass("selected2").parent().siblings().children('span').removeClass("selected2");
+    $('ul li').children('label').css('background', 'url(../img/qietu/sx2.png) no-repeat');
+    // $('ul li').children('label').css('background', 'url(../img/qietu/sx1.png) no-repeat').parent().siblings().children('label').css('background', 'url(../img/qietu/sx.png) no-repeat')
+
+    console.log('V001_123_wk'.split('_')[2]);
+    
+</script>

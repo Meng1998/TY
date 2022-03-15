@@ -1,0 +1,49 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "TY_OA API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "OA"
+  ],
+  "author": "LYW",
+  "license": "ISC",
+  "dependencies": {
+    "colors-console": "^1.0.3",
+    "config": "^3.2.5",
+    "cron": "^1.8.2",
+    "crypto-js": "^4.0.0",
+    "diskinfo": "0.0.3",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http.https": "^1.0.4",
+    "internal-ip": "^6.2.0",
+    "ipmask": "^1.0.0",
+    "js-md5": "^0.7.3",
+    "jsonwebtoken": "^8.5.1",
+    "macos-release": "^2.4.1",
+    "mysql2": "^2.1.0",
+    "node-jsencrypt": "^1.0.0",
+    "node-rsa": "^1.0.8",
+    "nodejs-websocket": "^1.7.2",
+    "npm-path": "^2.0.4",
+    "os-name": "^4.0.0",
+    "os-uptime": "^2.0.2",
+    "os-utils": "0.0.14",
+    "pg": "^7.17.1",
+    "pg-hstore": "^2.3.3",
+    "public-ip": "^4.0.3",
+    "request": "^2.88.2",
+    "restify": "^8.5.1",
+    "restify-cors-middleware": "^1.1.1",
+    "sequelize": "^5.21.3",
+    "svg-captcha": "^1.4.0",
+    "uuid": "^8.2.0",
+    "win-release": "^3.0.0",
+    "windows-release": "^4.0.0"
+  },
+  "bin": "src/index.js"
+}

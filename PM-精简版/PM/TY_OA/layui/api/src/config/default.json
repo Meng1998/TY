@@ -1,0 +1,39 @@
+{
+    "restify": {
+        "name": "TY_OA WebAPI",
+        "port": 8090
+    },
+    "websocket": {
+        "name": "TY_OA WebSocket",
+        "port": 8091
+    },
+    "maintain": {
+        "name": "TY_OA Maintain",
+        "port": 8092
+    },
+    "database": {
+        "dialect": "mysql",
+        "username": "root",
+        "password": "tyaimap",
+        "host": "localhost",
+        "port": 3306,
+        "dbname": "pe"
+    },
+    "webapi": {
+        "writelog": false
+    },
+    "token": {
+        "enable": false,
+        "secret": "410af04e4b24bd8674f5c10c0987c6e8"
+    },
+    "ak": "IxEcoGsuXRYbAyVbFGhsx3lPh95LvLs7",
+    "files": {
+        "attachment": "D:\\Publish\\File\\attachment",
+        "licence": "D:\\Publish\\File\\licence",
+        "network": "http://localhost:8080/"
+    },
+    "dingtalk": {
+        "appkey": "ding088bpthgv9kf8gbu",
+        "appsecret": "k5rVOJSCnGzdYL7YWDp3ed9mkgX2uJxHyEKh7EKYMgvUlJI1NG0lkwQmDATL6aVd"
+    }
+}

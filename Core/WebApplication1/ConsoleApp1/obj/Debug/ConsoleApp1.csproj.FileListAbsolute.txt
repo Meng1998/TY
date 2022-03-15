@@ -1,0 +1,7 @@
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+G:\桌面备份\Core\WebApplication1\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

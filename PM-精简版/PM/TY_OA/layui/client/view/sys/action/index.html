@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>功能管理</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-search-label">功能名称</label>
+                            <div class="layui-input-inline">
+                                <input name="action_name" placeholder="请输入功能名称" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" type="button" lay-submit
+                                lay-filter="LAY-action-search">搜索</button>
+                            <button class="layui-btn" type="button" lay-submit lay-filter="LAY-action-reset">重置</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="LAY-action-manage" lay-filter="LAY-action-manage"></table>
+                <script type="text/html" id="toolbar">
+                    <div class="layui-btn-container">
+                        <button class="layui-btn layui-btn-sm" lay-event="add">添加功能</button>
+                        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">修改功能</button>
+                        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">删除功能</button> 
+                        <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="authorise">功能分配</button>
+                    </div>
+                </script>
+                <script type="text/html" id="enable-tool">
+                    <input type="checkbox" lay-filter="enable" lay-skin="switch" lay-text="启用|关闭" value="{{ d.id }}" {{d.action_enable === 1 ? "checked" : ""}}>
+                </script>
+                <script type="text/html" id="tool">
+                    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">修改</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="authorise">功能分配</a> 
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

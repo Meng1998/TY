@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<title>mapvision view3d api demo </title>
+
+		<script type="text/javascript" src="http://www.aimapvision.com/mapvision3d/sdk/mapvision3d.min.js"></script>
+
+		<style>
+			.loading {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vw;
+				background-color: rgba(255, 255, 255, 0.8)
+			}
+
+			.loading-img {
+				width: 5.556vw;
+				height: 5.556vw;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+
+			@keyframes turn {
+				0% {
+					-webkit-transform: rotate(0deg);
+				}
+				25% {
+					-webkit-transform: rotate(90deg);
+				}
+				50% {
+					-webkit-transform: rotate(180deg);
+				}
+				75% {
+					-webkit-transform: rotate(270deg);
+				}
+				100% {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+
+			.loading-img img {
+				width: 100%;
+				animation: turn 1s linear infinite;
+			}
+
+			.loading-none {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="loading">
+			<div class="loading-img">
+				<img src="img/Loading.png" />
+			</div>
+		</div>
+		<script>
+			"use strict";
+
+			function loadingToggle() {
+            document.getElementsByClassName('loading')[0].classList.toggle('loading-none');
+        }
+
+		</script>
+	</body>
+</html>

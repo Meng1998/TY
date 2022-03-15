@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>项目详情</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        .detail {
+            height: 636px;
+        }
+
+        .timeline {
+            height: 563px;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs5">
+                <div class="layui-card">
+                    <div class="layui-card-body detail">
+                        <input id="id" name="id" style="display: none;" />
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;项目编号：</span>
+                                <span id="project_code" style="color: blue;"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;项目名称：</span>
+                                <span id="project_name"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;项目类型：</span>
+                                <span id="project_type"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;跟进状态：</span>
+                                <span id="follow_status"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;项目归属地：</span>
+                                <span id="address"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="layui-text">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;客户名称：</span>
+                                <span id="custom_name"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;客户地址：</span>
+                                <span id="custom_address"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;客户联系人：</span>
+                                <span id="contacts_name"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;联系人电话：</span>
+                                <span id="contacts_tel"></span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="layui-text">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;项目负责人：</span>
+                                <strong><span id="responsible_name" style="color: red;"></span></strong>
+                            </div>
+                        </div>
+                        <div class="layui-text">
+                            <div class="layui-text" style="padding-top: 20px;">
+                                <span>&nbsp;创建人：</span>
+                                <span id="creater_name"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;创建时间：</span>
+                                <span id="create_time"></span>
+                            </div>
+                        </div>
+                        <div class="layui-text" style="padding-top: 20px;">
+                            <div class="user-info-list-item">
+                                <span>&nbsp;备注：</span>
+                                <span id="remark"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs7">
+                <div class="layui-card">
+                    <div class="layui-tab layui-tab-brief" lay-filter="LAY-project-manage">
+                        <ul class="layui-tab-title">
+                            <li data-type="mine" class="layui-this">项目动态</li>
+                            <li data-type="total">移交记录</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <div class="layui-card">
+                                    <div class="layui-card-body timeline" style="overflow: auto;">
+                                        <ul id="dynamic-timeline" class="layui-timeline">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="layui-card">
+                                    <div class="layui-card-body timeline" style="overflow: auto;">
+                                        <ul id="transfer-timeline" class="layui-timeline">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

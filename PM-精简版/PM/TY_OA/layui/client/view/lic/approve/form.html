@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>许可授权</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        #upload {
+            padding: 60px;
+            width: calc(100% - 120px);
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" lay-filter="LAY-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属项目</label>
+                    <div class="layui-input-block">
+                        <input name="id" style="display: none;">
+                        <input name="project_id" style="display: none;">
+                        <input name="authorizer_id" style="display: none;">
+                        <input name="authorizer_name" style="display: none;">
+                        <input name="project_name" autocomplete="off" placeholder="请选择所属项目" readonly
+                            class="layui-input" />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">机器码</label>
+                    <div class="layui-input-block">
+                        <input name="machine_id" autocomplete="off" placeholder="请输入机器码" lay-verify="required" readonly
+                            class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="margin-top:7.5px">请假日期</label>
+                    <div class="layui-input-block layui-col-space15">
+                        <div class="layui-col-xs6" style="padding-left: 0px">
+                            <input name="start_time" autocomplete="off" placeholder="请选择起始日期" readonly
+                                class="layui-input">
+                        </div>
+                        <div class="layui-col-xs6" style="padding-left: 0px">
+                            <input name="expire_time" autocomplete="off" placeholder="请选择结束日期" readonly
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-upload-drag" id="upload">
+                    <i class="layui-icon layui-icon-upload"></i>
+                    <p>点击上传，或将文件拖拽到此处</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

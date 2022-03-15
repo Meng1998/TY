@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>字体图标</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .hn-icon,
+        .hn-icon-show {
+            margin-bottom: 15px;
+        }
+
+        .hn-icon li {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            margin: 5px;
+            border: solid 1px #eee;
+            cursor: pointer;
+        }
+
+        .hn-icon li:hover {
+            background-color: #eee;
+            color: #009688;
+        }
+
+        .hn-icon li .layui-icon {
+            font-size: 26px;
+        }
+
+        .hn-icon li .fa {
+            display: inline-block;
+            font: FontAwesome;
+            font-size: 26px;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            line-height: 36px;
+        }
+
+        .hn-icon-show li {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: left;
+            min-width: 220px;
+            line-height: 36px;
+            cursor: pointer;
+        }
+
+        .hn-icon-show li:hover {
+            background-color: #eee;
+            color: #009688;
+        }
+
+        .hn-icon-show li .layui-icon {
+            font-size: 20px;
+        }
+
+        .hn-icon-show li .fa {
+            display: inline-block;
+            font: FontAwesome;
+            font-size: 20px;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            line-height: 36px;
+            margin-right: 5px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-card" style="overflow-y:auto;height: 100%;">
+        <div class="layui-card-body">
+            <div class="layui-tab layui-tab-brief" style="margin-top:0px">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">layui 内置图标</li>
+                    <li>font-awesome 图标</li>
+                </ul>
+                <div class="layui-tab-content" style="padding:10px">
+                    <div class="layui-tab-item layui-show">
+                        <ul id="layui-icon" class="hn-icon-show"></ul>
+                    </div>
+                    <div class="layui-tab-item">
+                        <span>网页</span>
+                        <hr>
+                        <ul id="fa-icon-web" class="hn-icon-show"></ul>
+                        <span>表单</span>
+                        <hr>
+                        <ul id="fa-icon-form" class="hn-icon-show"></ul>
+                        <span>图表</span>
+                        <hr>
+                        <ul id="fa-icon-chart" class="hn-icon-show"></ul>
+                        <span>货币</span>
+                        <hr>
+                        <ul id="fa-icon-money" class="hn-icon-show"></ul>
+                        <span>文件类型</span>
+                        <hr>
+                        <ul id="fa-icon-file" class="hn-icon-show"></ul>
+                        <span>文本编辑</span>
+                        <hr>
+                        <ul id="fa-icon-text" class="hn-icon-show"></ul>
+                        <span>指示方向</span>
+                        <hr>
+                        <ul id="fa-icon-direction" class="hn-icon-show"></ul>
+                        <span>视频播放</span>
+                        <hr>
+                        <ul id="fa-icon-play" class="hn-icon-show"></ul>
+                        <span>辅助功能</span>
+                        <hr>
+                        <ul id="fa-icon-aux" class="hn-icon-show"></ul>
+                        <span>版本新增</span>
+                        <hr>
+                        <ul id="fa-icon-new" class="hn-icon-show"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

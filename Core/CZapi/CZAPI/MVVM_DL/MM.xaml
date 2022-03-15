@@ -1,0 +1,17 @@
+﻿<Window x:Class="MVVM_DL.MM"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrl="clr-namespace:WPF_DateTimePicker.UserControls.DateTimePicker.View;assembly=WPF_DateTimePicker.UserControls"
+        xmlns:local="clr-namespace:MVVM_DL"
+        mc:Ignorable="d"
+        Title="MM" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Label VerticalContentAlignment="Center">DateTimePicker使用：</Label>
+            <ctrl:DateTimePicker BorderBrush="Gray" Height="35" Width="170" Margin="10,0,0,0" x:Name="timeone"></ctrl:DateTimePicker>
+            <Button x:Name="button1" Content="获取时间" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

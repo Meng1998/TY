@@ -1,0 +1,983 @@
+*{margin: 0;padding: 0;border: 0;}
+
+ul,
+li {
+    list-style: none;
+}
+i{
+    font-style:normal
+}
+input{  
+	background:none;  
+	outline:none;  
+	border:none;
+}
+
+#mapvision3d {
+    position: fixed;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #000;
+}
+#mapvision3d video {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;
+}
+/* iframe{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+} */
+ /* .Main{
+     width: 100%;
+     height: 100%;
+     overflow: hidden;
+     z-index: 10;
+ } */
+ .main-zz{
+    width: 100%;
+    height: 100%;
+    /* overflow: hidden; */
+    background: url("../img/beij/zezao.png") no-repeat top center ;
+	background-size: cover;
+    background-attachment: fixed;
+    position: fixed;
+	top: 0;
+	left: 0;
+ }
+ .leftmain{
+     position: fixed;
+     left: 0;
+    width: 16vw !important;
+    height: 100vh !important;
+    background: url("../img/beij/zezao.png");
+    background-position: -300px  100% ;
+ }
+ .rightmain{
+    position: fixed;
+    right:  0;
+   width: 16vw !important;
+   height: 100vh !important;
+   background: url("../img/beij/zezao.png");
+   background-position: 600px  100% ;
+}
+ 
+ .title{
+     /* width: 1920px; */
+    position: fixed;
+    top: 0px;
+     width: 100vw;
+     height: 80px;
+     line-height: 80px;
+     background: url("../img/qietu/title.png") no-repeat top center;
+
+ }
+ .title>h1{
+    font-family: "微软雅黑";
+     width: 320px;
+     height: 80px;
+     color:rgb(254, 192,87);
+     margin: 0px auto;
+ }
+ 
+ .title .title-time{
+     width: 14%;
+     height: 10%;
+     display: flex;
+     position: absolute;
+     top: 0;
+     right: 0;
+ }
+ .title .title-time1{
+     margin-left: 10px;
+ }
+ .title .title-time p{
+     width: 100%;
+     height: 18px;
+     font-size: 12px;
+     padding: 0;
+     margin: 0;
+     margin-top: -4px;
+ }
+
+ .title .title-time span,.title .title-time p{
+     color: white;
+ }
+
+ .bottom{
+     position: fixed;
+     bottom: 5px;
+     width: 100%;
+     height: 11px;
+     background: url("../img/qietu/botm.png") no-repeat bottom;
+ }
+
+ /*左栏*/
+ .leftm{
+     width: 251px;
+     height: 85%;
+     position: fixed;
+	 top: 8%;
+	 left: 5px;
+     /* position: absolute; */
+     color: white;
+     font-size: 16px;
+     background: rgba(41,36, 33, .8);
+ }
+.leftm-top{
+width: 100%;
+height:65%;
+overflow: hidden;
+}
+.leftm-content{
+width: 100%;
+height: 27%;
+margin-top: 10px;
+}
+.leftm-bottom{
+width: 100%;
+height: 38%;
+margin-top: 10px;
+overflow: hidden;
+}
+.tit-tt{
+    width: 100%;
+    height: 35px;
+    line-height: 25px;
+    background: url("../img/qietu/line.png") no-repeat bottom;
+    background-size: contain;
+    border-bottom: 1px solid gray;
+}
+.tit-tt>i{
+    float: left;
+    margin:5px 8px 0px 0px;
+    width: 13px;
+    height: 18px;
+    background: url("../img/qietu/left.png") no-repeat   center;
+}
+.tit-tt>span{
+    width: 72px;
+    height: 16px;
+    font-size: 18px;
+    font-family: ShiShangZhongHeiJianTi;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+.tit-tt>label{
+    float: right;
+    height: 10px;
+    font-size: 12px;
+    font-family: PingFang SC;
+    font-weight: 100;
+    color: #FFFFFF;
+}
+.m-top-totle{
+    margin: 10px 12px;
+    width: 205px;
+    height: 50px;
+    /* border:  1px solid rgb(66,148,161); */
+    border: 1px transparent solid;
+    border-left: 4px transparent solid;
+    border-right: none;
+    line-height: 45px;
+    text-align: center;
+    border-image: linear-gradient(to left, transparent, #23b7cb) 1 10;
+    background-image:linear-gradient(to right,rgba(26,63,71),rgba(26,63,71,0.08)) ;
+}
+.m-top-totle>h2{
+    display: inline;
+    margin-left: 15px;
+    margin-top: 5px;
+    color: rgb(254, 192,87);
+    font-weight: 400;
+}
+.leftm-top ul {
+    width: 94%;
+    height: 72.5%;
+        /* overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 5px;
+        direction: ltr; */
+    overflow: auto;
+    padding: 1rem;
+    padding-top: 0rem;
+    direction: rtl;
+}
+.spinner {
+    width: 60px;
+    height: 60px;
+    background-color: #9b9e99;
+    margin: 30px auto;
+    -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+    animation: rotateplane 1.2s infinite ease-in-out;
+  }
+   
+  @-webkit-keyframes rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+  }
+   
+  @keyframes rotateplane {
+    0% {
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    } 50% {
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+    } 100% {
+      transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+  }
+.leftm-top ul li {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    height: 36px;
+    justify-content: space-between;
+    margin: 3px 0px;
+    color: white;
+    cursor: pointer;
+}
+.leftm-top ul li label{
+    width: 24px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background: url("../img/qietu/sx.png") no-repeat center;
+}
+.leftm-top ul li span{
+    width: 203px;
+    height: 35px;
+    line-height: 35px;
+    background: url("../img/qietu/dk.png") no-repeat center;
+}
+.leftm-top ul li span i:first-child{
+    float: left;
+    margin-left: 25px;
+}
+.leftm-top ul li span i:last-child{
+    float: right;
+    margin-right: 25px;
+}
+  
+.leftm-top ul::-webkit-scrollbar {
+    width: 4px;
+    /*对垂直流动条有效*/
+    height: 5px;
+    /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.leftm-top ul::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px #48607a54;
+    background-color:  rgb(26,63,71);
+    border-radius: 3px;
+}
+
+
+/*定义滑块颜色、内阴影及圆角*/
+.leftm-top ul::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgb(79,175,190);
+   
+}
+.leftm-bottom p{
+    margin-bottom: 6px;
+}
+.TxtSs{
+   
+    width: 22px;
+    height: 22px;
+    float: left;
+    background: url("../img/qietu/ss.png") no-repeat center;
+    border: 2px solid rgb(42,88,68) ;
+    border-right: none;
+    margin-left: 2px;
+    border-top-left-radius:10px 10px;
+    border-bottom-left-radius:10px 10px;
+}
+.TxtSs:hover{
+    cursor:pointer
+}
+
+.Txt-mes{
+    width: 212px;
+    height: 22px;
+    float: left;
+    border: 2px solid rgb(42,88,68) ;
+    border-left: none;
+    color: white;
+    border-top-right-radius:10px 10px;
+    border-bottom-right-radius:10px 10px;
+}
+.dh-lx{
+    margin: 50px auto;
+    width: 96%;
+    height: 200px;
+    font-size: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+.dh-lx li{
+    width: 100%;
+    height: 76px;
+    background: rgba(27, 63, 71, 0.26);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 6px;
+    margin-bottom: 5px;
+}
+.qid{
+    width: 100%;
+    height: 27px;
+    line-height: 27px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+.qid span:nth-child(1){
+    float: left;
+    width: 22px;
+    height: 22px;
+   
+    background: url("../img/qietu/chufa.png") no-repeat center;
+}
+.qid span:nth-child(2){
+    float: left;
+    margin-left: 15px;
+}
+.qid span:nth-child(3){
+    float: right;
+    width: 50px;
+    text-align: center;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 5px;
+    border: 1px solid  rgb(42,88,68);
+    background-color: rgb(0,44,57,0.5);
+    cursor: pointer;
+}
+.zongd{
+    width: 100%;
+    height: 27px;
+    line-height: 27px;
+    box-sizing: border-box;
+}
+.zongd span:nth-child(1){
+    float: left;
+    width: 22px;
+    height: 27px;
+    background: url("../img/qietu/zd.png") no-repeat center;
+}
+.zongd span:nth-child(2){
+    float: left;
+    margin-left: 15px;
+}
+.zongd span:nth-child(3){
+    float: right;
+    width: 50px;
+    text-align: center;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 5px;
+    border: 1px solid  rgb(42,88,68);
+    background-color: rgb(0,44,57,0.5);
+    cursor: pointer;
+}
+.dh-lx::-webkit-scrollbar {
+    width: 5px;
+    /*对垂直流动条有效*/
+    height: 5px;
+    /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.dh-lx::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px #48607a54;
+    background-color:  rgb(26,63,71);
+    border-radius: 3px;
+}
+
+
+/*定义滑块颜色、内阴影及圆角*/
+.dh-lx::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgb(79,175,190);
+}
+
+
+/*右栏*/
+ .rightm{
+     width: 251px;
+     height: 85%;
+     position: fixed;
+	 top: 8%;
+	 right: 5px;
+     color: white;
+     font-size: 16px;
+     background: rgba(41,36, 33, .8);
+ }
+
+ .rightm-top{
+    width: 100%;
+    height: 32%;
+    overflow: hidden;
+ }
+.ent-sbfb{
+    margin-top: 7px;
+    width: 100%;
+    height: 230px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+.ent-sbfb li{
+    width: 100%;
+    height: 68px;  
+    margin-bottom: 4px; 
+}
+ .ent-sbfb li img{
+    float: left;
+    margin-left: 25px;
+    width: 68px;
+    height: 68px;
+  
+}
+.ent-sbfb li span:nth-child(1):hover{
+    background: url("../img/qietu/qianj-xz.png") no-repeat center;
+    background-size: contain;
+}
+.ent-sbfb li span{
+    float: left;
+    margin-left: 30px;
+    width: 105px;
+    height: 70px;
+}
+.ent-sbfb li span label:nth-child(1){
+    display: block;
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    line-height: 35px ;
+    background: url("../img/qietu/sb-line.png") no-repeat bottom;
+}
+.ent-sbfb li span label:nth-child(2){
+    display: block;
+    width: 100%;
+    height: 35px;
+    color: rgb(254, 192,87);
+    font-size: 20px;
+    text-align: center;
+    line-height: 35px ;
+}
+
+
+.ent-sbfb::-webkit-scrollbar {
+    width: 5px;
+    /*对垂直流动条有效*/
+    height: 5px;
+    /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.ent-sbfb::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px #48607a54;
+    background-color:  rgb(26,63,71);
+    border-radius: 3px;
+}
+
+
+/*定义滑块颜色、内阴影及圆角*/
+.ent-sbfb::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px  rgb(79,175,190);
+}
+
+
+
+.rightm-content{
+    width: 100%;
+    height: 30%;
+    margin-top: 20px;
+    overflow: hidden;
+    }
+.rightm-bottom{
+    width: 100%;
+    height: 35%;
+    margin-top: 20px;
+    overflow: hidden;
+}
+/* 文化名人 */
+.mr-tol,.mr-tol1{
+    width: 100%;
+    /* height: 93.7%; */
+    height: 70%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+
+.mr-tol li ,.mr-tol1 li{
+    float: left;
+    margin-left: 3px;
+    width: 120px;
+    height: 52px;
+    margin-top: 3px;
+}
+/* 文化名人 */
+.mr-tol li span{
+    float: left;
+    margin-left: 3px;
+    width: 112px;
+    height: 52px;
+    background: url("../img/qietu/mrtj1.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.mr-tol1 li span{
+    float: left;
+    margin-left: 3px;
+    width: 112px;
+    height: 52px;
+    background: url("../img/qietu/nsly.png") no-repeat center;
+    background-size: 100% 100%;
+}
+
+.whmr-t{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 10px 0px 0px 6px;
+    width: 90%;
+    text-align: center;
+    font-size: 12px;
+}
+.whmr-b{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+.mr-tol::-webkit-scrollbar,.mr-tol1::-webkit-scrollbar {
+    width: 5px;
+    /*对垂直流动条有效*/
+    height: 5px;
+    /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.mr-tol::-webkit-scrollbar-track,.mr-tol1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px #48607a54;
+    background-color:  rgb(26,63,71);
+    border-radius: 3px;
+}
+
+
+/*定义滑块颜色、内阴影及圆角*/
+.mr-tol::-webkit-scrollbar-thumb,.mr-tol1::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgb(79,175,190);
+}
+
+.right-CJ{
+    position: fixed;
+    width: 50px;
+    height: 190px;
+    right: 280px;
+    bottom: 7%
+}
+.right-CJ span:nth-child(1) {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-top: 14px;
+    background: url("../img/qietu/fw.png") no-repeat center;
+}
+.right-CJ span:nth-child(1):hover{
+    background: url("../img/qietu/fw-xz.png") no-repeat center;
+}
+.right-CJ span:nth-child(2) {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-top: 14px;
+    background: url("../img/qietu/zb.png") no-repeat center;
+}
+.right-CJ span:nth-child(2):hover{
+    background: url("../img/qietu/zb-xz.png") no-repeat center;
+}
+.right-CJ span:nth-child(3) {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-top: 14px;
+    background: url("../img/qietu/cywz.png") no-repeat center;
+}
+.right-CJ span:nth-child(3):hover{
+    background: url("../img/qietu/cywz-xz.png") no-repeat center;
+}
+@keyframes fadeInUpLeft
+{
+    from {
+        opacity: 0;
+        -webkit-transform: translate(0,-1000px); /* Safari */
+    }
+    to {
+        opacity:1;
+        -webkit-transform: translate(0,10px); /* Safari */
+    }
+}
+.ifrm-tc{
+    color: white;
+    position: absolute;
+    top: 90px;
+    left: 380px;
+    width: 358px;
+    height: 482px;
+    background: url("../img/qietu/xtc.png") no-repeat center ;
+    /* animation: fadeInDown 1s linear; */
+    -webkit-animation: fadeInUpLeft 3s linear;
+    z-index: 5;
+}
+
+.ifrm-tc p:nth-child(1){
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    background: url("../img/qietu/ct-title.png") no-repeat center;
+}
+.ifrm-tc p:nth-child(1) span{
+    float: left;
+    margin-left: 18px;
+}
+.ifrm-tc p:nth-child(1) label{
+    float: right;
+    margin-right: 10px;
+}
+.ifrm-tc p:nth-child(2){
+    width: 100%;
+    height: 55px;
+}
+.ifrm-tc p:nth-child(2) span{
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-top: 13px;
+    cursor: default ;
+}
+.ifrm-tc p:nth-child(2) span:nth-child(1){
+    margin-left: 45px;
+    width: 80px;
+    background: url("../img/qietu/l.png") no-repeat center;
+}
+.ifrm-tc p:nth-child(2) span:nth-child(1):hover{
+    background: url("../img/qietu/l-xz.png") no-repeat center;
+    text-shadow: .1rem 0rem .3rem  rgb(79,175,190),-.1rem 0rem .3rem   rgb(79,175,190),0rem .2rem .3rem  rgb(79,175,190),0rem -.2rem .3rem  rgb(79,175,190);
+    cursor: default ;
+}
+
+.ifrm-tc p:nth-child(2) span:nth-child(2){
+    width: 90px;
+    background: url("../img/qietu/m.png") no-repeat center;
+}
+.ifrm-tc p:nth-child(2) span:nth-child(2):hover{
+    background: url("../img/qietu/m-xz.png") no-repeat center;
+    text-shadow: .1rem 0rem .3rem  rgb(79,175,190),-.1rem 0rem .3rem   rgb(79,175,190),0rem .2rem .3rem  rgb(79,175,190),0rem -.2rem .3rem  rgb(79,175,190);
+    cursor: default ;
+}
+
+.ifrm-tc p:nth-child(2) span:nth-child(3){
+    width: 80px;
+    background: url("../img/qietu/r.png") no-repeat center;
+}
+.ifrm-tc p:nth-child(2) span:nth-child(3):hover{
+    background: url("../img/qietu/r-xz.png") no-repeat center;
+    text-shadow: .1rem 0rem .3rem  rgb(79,175,190),-.1rem 0rem .3rem   rgb(79,175,190),0rem .2rem .3rem  rgb(79,175,190),0rem -.2rem .3rem  rgb(79,175,190);
+    cursor: default ;
+}
+.ifrm-tc img{
+    width: 300px;
+    height: 350px;
+    margin: 14px 0px 0px 27px;
+}
+.Jjinfo{
+    display: none;
+    width: 300px;
+    height: 350px;
+    margin: 14px 0px 0px 27px;
+    font-size: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+ .Jjinfo i {
+    color:rgb(254, 192,87);
+}
+.Jjinfo::-webkit-scrollbar {
+    width: 5px;
+    /*对垂直流动条有效*/
+    height: 5px;
+    /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.Jjinfo::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px #48607a54;
+    background-color:  rgb(26,63,71);
+    border-radius: 3px;
+}
+
+
+/*定义滑块颜色、内阴影及圆角*/
+.Jjinfo::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgb(79,175,190);
+}
+
+.ifrm-tc-devic{
+    color: white;
+    position: absolute;
+    top: 141px;
+    right: 266px;
+    width: 324px;
+    height: 394px;
+    background: url(../img/qietu/xtc.png) no-repeat center;
+    background-size: contain;
+}
+.ifrm-tc-devic p{
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    margin: -2px 0px 0px 16px;
+    background: url(../img/qietu/ct-title.png) no-repeat center;
+    background-size: contain;
+}
+.ifrm-tc-devic p span{
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 15px;
+}
+.ifrm-tc-devic p label{
+    float: right;
+    margin-right: 40px;
+}
+
+.devic-list{
+    width: 283px;
+    height: 335px;
+    margin: 3px auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+ .list-span{
+     float: left;
+    margin: 0px 0px 2px 5px;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    
+    border-bottom: 1px solid rgb(79,175,190);
+    cursor: default ;
+} 
+.list-span:hover{
+    border: 1px solid rgb(155,249,249);
+}
+.devic-list::-webkit-scrollbar {
+    width: 5px;
+    /*对垂直流动条有效*/
+    height: 5px;
+    /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.devic-list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px #48607a54;
+    background-color:  rgb(26,63,71);
+    border-radius: 3px;
+}
+
+
+/*定义滑块颜色、内阴影及圆角*/
+.devic-list::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgb(79,175,190);
+}
+
+.playWnd1 {
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .videoKongz {position: absolute;z-index: 1000;height:30px;width: 500px;background:rgba(0,0,0,0.66) ;  }
+  .videoKongz span{float: right;margin-right: 10px;color: #fff;margin-top: 8px;cursor: pointer;}
+  /* .videoKongz span:nth-child(1){
+      float: left;
+      border: 1px solid black;
+  } */
+
+
+  /***组织-***/
+
+.tree-list ul{
+    display: none;
+    padding-left:20px;
+}
+.tree-list>.display-tree:before{
+    float: left;
+    color: aqua;
+    content: "-";
+}
+
+.tree-list>.hide-tree:before{
+    float: left;
+    color: aqua;
+    content: "+";
+}
+
+
+/* 切换的样式 */
+/* 上边的头部切换的样式 */
+.switch-top{
+    margin: 5px;
+    margin-top: 2px;
+    margin-left: 12px;
+    width: 100px;
+    height: 20px;
+    box-sizing: border-box;
+   /* border: 1px solid red; */
+}
+
+/* 图片 */
+.switch-top span:nth-child(1){
+    display: inline-block;
+    width: 37px;
+    height: 28px;
+    background: url("../img/qietu/tx-g.png") no-repeat;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 10px;
+}
+.switch-top span:nth-child(2){
+    display: inline-block;
+    width: 37px;
+    height: 28px;
+    background: url("../img/qietu/cl.png") no-repeat;
+    box-sizing: border-box;
+    position: relative;
+}
+/* 添加伪类的图片 */
+.active_attrc::after{
+    position: absolute;
+    top: -5px;
+    left: -7px;
+    content:url('../img/qietu/jx.png');
+}
+.mr-switch{
+    height: 100%;
+}
+.switch-fcontent{
+    height: 88%;
+}
+
+.switch-content .content-tab{
+    display: none;
+}
+.switch-content .selected{
+    display: block;
+}
+.switch-fcontent ul{
+    display: none;
+}
+.switch-fcontent .selected1{
+    display: block;
+}
+
+
+.switch-frame{
+    width:100%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 1px;
+}
+.switch-frame span:nth-child(1){
+    display: inline-block;
+    width: 48%;
+    height: 32px;
+    text-align: left;
+    background: url("../img/qietu/jx2.png") no-repeat;
+    text-align: center;
+    line-height: 32px;
+    cursor: pointer;
+}
+.switch-frame span:nth-child(2){
+    display: inline-block;
+    width: 48%;
+    height: 32px;
+    background: url("../img/qietu/jx1.png") no-repeat;
+    text-align: center;
+    line-height: 32px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+
+.selected2{
+    color: rgb(254, 192,87);
+}
+.leftm-top ul li label{
+    width: 24px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background: url("../img/qietu/sx.png") no-repeat center;
+}
+.cemetery{
+    position: absolute;
+    top: 340px;
+    left: 1100px;
+    width: 188px;
+    height: 128px;
+    background: url("../img/qietu/bj1.png") no-repeat center;
+    /* animation: fadeInDown 1s linear; */
+    /* -webkit-animation: fadeInUpLeft 3s linear; */
+    z-index: 5;
+}
+.cemetery-top{
+    color: white;
+    background: url("../img/qietu/bj2.png") no-repeat center;
+    /* animation: fadeInDown 1s linear; */
+    /* -webkit-animation: fadeInUpLeft 3s linear; */
+    z-index: 5;
+}
+.cemetery-top p{
+    display: flex;
+    justify-content: space-between;
+}
+.cemetery-content{
+    margin-top: 18px;
+    color: #fff;
+}
+.cemetery-content p {
+   margin-bottom: 20px;
+}
+.cemetery-content p span{
+    color: Cyan;
+}

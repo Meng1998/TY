@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>合同信息</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        /* 隐藏number左侧箭头 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs7">
+                <div class="layui-card">
+                    <div class="layui-card-header">合同信息</div>
+                    <div class="layui-card-body layui-row layui-col-space10" style="padding: 15px;">
+                        <form class="layui-form" lay-filter="LAY-form">
+                            <div class="layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">项目编号</label>
+                                    <div class="layui-input-block">
+                                        <input name="project_id" style="display: none;">
+                                        <input name="project_code" autocomplete="off" readonly class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">项目名称</label>
+                                    <div class="layui-input-block">
+                                        <input name="project_name" autocomplete="off" readonly class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">甲方名称</label>
+                                    <div class="layui-input-block">
+                                        <input name="custom_id" style="display: none;">
+                                        <input name="custom_name" autocomplete="off" class="layui-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">合同金额</label>
+                                    <div class="layui-input-block">
+                                        <input verify="number" type="number" name="amount" autocomplete="off"
+                                            placeholder="请输入合同金额" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">签订日期</label>
+                                    <div class="layui-input-block">
+                                        <input name="sign_time" autocomplete="off" placeholder="请输入签订日期" readonly
+                                            class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">交货日期</label>
+                                    <div class="layui-input-block">
+                                        <input name="delivery_time" autocomplete="off" placeholder="请输入交货日期" readonly
+                                            class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">合同附件</label>
+                                <div class="layui-input-block layui-col-space0">
+                                    <div class="layui-col-xs10">
+                                        <input id="files" index="" autocomplete="off" placeholder="选择一个或多个文件..."
+                                            readonly class="layui-input">
+                                    </div>
+                                    <div class="layui-col-xs2">
+                                        <button id="choose" type="button" class="layui-btn layui-btn-fluid"
+                                            lay-event="add">选择文件</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">备注信息</label>
+                                <div class="layui-input-block">
+                                    <textarea id="remark" name="remark" placeholder="请输入补充内容"
+                                        class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs5">
+                <div class="layui-card">
+                    <div class="layui-card-header">付款条件</div>
+                    <div class="layui-card-body">
+                        <table id="LAY-payment-manage" lay-filter="LAY-payment-manage"></table>
+                        <script type="text/html" id="toolbar">
+                            <div class="layui-btn-container">
+                                <button class="layui-btn layui-btn-sm" lay-event="add">添加条件</button>
+                                <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="delete">删除条件</button>
+                            </div>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

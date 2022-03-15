@@ -1,0 +1,15 @@
+﻿<Application x:Class="MVVM_DL.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MVVM_DL"
+             StartupUri="XX.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/Page1.xaml"/>
+                <ResourceDictionary Source="Style/Page2.xaml"/>
+                <ResourceDictionary Source="Style/Page3.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

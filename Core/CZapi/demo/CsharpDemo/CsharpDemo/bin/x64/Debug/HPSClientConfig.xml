@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--开启是满足客户端取流时对所有取流请求进行写码流-->
+<!--
+write_file为是否开启写文件的配置项，当值为“1”表示开启录像，“0”表示不开启录像，默认不开启录像；
+maxfilesize为最大录像文件大小，属性值的单位为M,默认为20M；
+xmleffectivetime为配置文件的生效时间，由第一次读取配置文件开始计时，属性值的单位为minute(分钟)，默认为5min；
+-->
+<config>
+    <Format write_file="0" max_filesize="20" xml_effectivetime="5" />
+<!--HPSClient支持在存储不重启并且不需要重新取流的情况下，通过修改配置文件，写特定取流点位的码流，包括收到的和回调的。-->
+<!--
+write_file为是否开启写文件的配置项，当值为“1”表示开启录像，“0”表示不开启录像，默认为0，不开启录像；
+maxfilesize为最大录像文件大小，属性值的单位为M,默认为20M；
+xmleffectivetime为配置文件的生效时间，由第一次读取配置文件开始计时，属性值的单位为minute(分钟)，默认为5min；
+取流url示例：rtsp://10.19.147.116:655/dac/realplay/eb10f4d34adb43c5bee10bd3cc87142c/MAIN/TCP
+index填写点位编号,如上述url中的eb10f4d34adb43c5bee10bd3cc87142c，最多支持填写5个点位。
+-->
+    <Format2 write_file="0" max_filesize="20" xml_effectivetime="5">
+        <DeviceInfo index="111" />
+        <DeviceInfo index="222" />
+        <DeviceInfo index="333" />
+        <DeviceInfo index="444" />
+        <DeviceInfo index="555" />
+    </Format2>
+</config>

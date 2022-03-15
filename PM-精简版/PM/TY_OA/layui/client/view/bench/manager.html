@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>工作台</title>
+    <script type="text/javascript" src="../../lib/include-lib.js?version=202102150234" libpath="../../" include="layui,echarts"></script>
+    <link rel="stylesheet" href="../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../js/base.js?version=202102150234"></script>
+    <style>
+        .carousel {
+            height: 206px;
+        }
+
+        .data {
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">跟进项目</div>
+                    <div class="layui-card-body">
+                        <table id="LAY-project-manage" lay-filter="LAY-project-manage"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">项目动态</div>
+                    <div class="layui-card-body">
+                        <table id="LAY-dynamic-manage" lay-filter="LAY-dynamic-manage"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">问题反馈</div>
+                    <div class="layui-card-body">
+                        <table id="LAY-feedback-manage" lay-filter="LAY-feedback-manage"></table>
+                        <script type="text/html" id="user-tool">
+                            {{# var style = ["normal", "checked", "info", "primary", "danger"] }}
+                            <!-- 遍历方案人员 -->
+                            {{# layui.each(d.examine, function(index, item) { }}
+                            {{#     if(item.solution) { }}
+                                        <button class="layui-btn layui-btn-xs layui-btn-{{ style[index] }}" lay-event="solution_view">{{item.user_name}}</button>
+                            {{#     } else { }}
+                                        <button class="layui-btn layui-btn-xs layui-btn-disabled">{{item.user_name}}</button>
+                            {{#     } }}
+                            {{# }); }}
+                        </script>
+                        <script type="text/html" id="solution-tool">
+                            {{# var user = layui.sessionData("session").user; }}
+                            {{# var ishave = false, number = 0; }}
+                            {{# layui.each(d.examine, function(index, item) { }}
+                            {{#     if(item.user_id === user.id && !(item.solution)) { }}
+                                        <button class="layui-btn layui-btn-xs layui-btn-checked" lay-event="user_solution">解决方案</button>
+                            {{#     } else if(item.solution) { }}
+                            {{#         number++ }}
+                            {{#     } }}
+                            {{# }); }}
+                            <!-- 
+                                判断 number 数量
+                                根据数量显示 技术方案 确认方案 按钮
+                            -->
+                            {{# if(number === d.examine.length && layui.setter.other.user.liff === user.id) { }}
+                                <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="feedback_solution">技术方案</button>
+                            {{# } else if(number === d.examine.length && layui.setter.other.user.xuxj === user.id && (d.feedback.solution)) { }}
+                                <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="confirm">确认方案</button>
+                            {{# } }}
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">项目补充</div>
+                    <div class="layui-card-body">
+                        <table id="LAY-addenda-manage" lay-filter="LAY-addenda-manage"></table>
+                    </div>
+                </div>
+            </div>
+            <script type="text/html" id="detail-tool">
+                {{# if(d.type === "project") { }}
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">详情信息</button>
+                {{# } else if(d.type === "dynamic") { }}
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" lay-event="detail">详情信息</button>
+                {{# } else if(d.type === "addenda") { }}
+                    <button class="layui-btn layui-btn-xs layui-btn-checked" lay-event="addenda">详情信息</button>
+                {{# } else if(d.type === "feedback") { }}
+                
+                {{# } }}
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

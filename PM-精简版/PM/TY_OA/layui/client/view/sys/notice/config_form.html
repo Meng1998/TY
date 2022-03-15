@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>字典信息</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <input name="types" style="display: none;">
+            <form class="layui-form" lay-filter="LAY-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">消息标题</label>
+                    <div class="layui-input-block">
+                        <input name="id" style="display: none;">
+                        <input name="category_id" style="display: none;">
+                        <input name="title" autocomplete="off" placeholder="请输入消息标题" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">内容描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="describe" rows="3" placeholder="请输入内容描述" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">消息标识</label>
+                    <div class="layui-input-block">
+                        <input name="ident" autocomplete="off" placeholder="请输入消息标识" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">消息类型</label>
+                    <div class="layui-input-block">
+                        <select name="type" autocomplete="off" placeholder="请选择消息类型" class="layui-input">
+                            <option value=''>请选择</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">接口地址</label>
+                    <div class="layui-input-block">
+                        <input name="controller_routor" autocomplete="off" placeholder="请输入接口地址" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">接口名称</label>
+                    <div class="layui-input-block">
+                        <input name="controller_name" autocomplete="off" placeholder="请输入接口名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">参数类型</label>
+                    <div class="layui-input-block">
+                        <select name="params_type" autocomplete="off" placeholder="请选择参数类型" class="layui-input">
+                            <option value=''>请选择</option>
+                            <option value='request'>request</option>
+                            <option value='response'>response</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否存库</label>
+                    <div class="layui-input-block">
+                        <input name="storage" style="display: none;">
+                        <input type="checkbox" lay-filter="storage" lay-skin="switch" lay-text="是|否">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">排序号</label>
+                    <div class="layui-input-block">
+                        <input verify="number" name="order" autocomplete="off" placeholder="请输入排序号" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" placeholder="请输入备注信息" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

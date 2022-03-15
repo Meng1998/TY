@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>系统运维</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../"
+        include="layui,font-awesome,reconnecting-websocket"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+    <style>
+        .box-content-wrapper {
+            height: 220px;
+        }
+
+        .box-content-wrapper .output {
+            text-align: center;
+            vertical-align: middle;
+            margin-top: 40px;
+        }
+
+        .box-content-wrapper .output span {
+            font-size: 60px;
+            line-height: 54px;
+        }
+
+        .box-content-wrapper .output label {
+            font-size: 14px;
+            line-height: 14px;
+            display: block;
+        }
+
+        .box-content-wrapper .title {
+            text-align: center;
+            height: 90px;
+            line-height: 90px;
+            font-size: 20px;
+        }
+
+        .box-inner-wrapper {
+            height: 66px;
+            line-height: 66px;
+            text-align: center;
+            font-size: 26px;
+        }
+
+        .data-group {
+            padding: 16px;
+            border-radius: 4px;
+            text-align: center;
+            background-color: #fff;
+            cursor: pointer;
+            display: block;
+        }
+
+        .data-group .data-header {
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+        }
+
+        .data-group {
+            box-shadow: 0 0 10px rgba(0, 0, 0, .08);
+        }
+
+        .data-group:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, .15);
+        }
+
+        .layui-name-label {
+            float: left;
+            display: block;
+            padding: 13px 15px;
+            width: auto !important;
+            font-size: 18px;
+            line-height: 6px;
+            text-align: right;
+            color: #005980;
+        }
+
+        .layui-role-label {
+            float: left;
+            display: block;
+            padding: 0px 15px;
+            width: auto !important;
+            font-size: 16px;
+            line-height: 0px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs8">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-xs8">
+                        <div class="layui-card">
+                            <div class="layui-card-header">服务运行时间（SERVER UPTIME）</div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space15">
+                                    <div class="layui-col-xs1"></div>
+                                    <div class="layui-col-xs10">
+                                        <div class="layui-row layui-col-space15 box-content-wrapper">
+                                            <div class="layui-col-xs3">
+                                                <div class="output">
+                                                    <span id="days">00</span>
+                                                    <label>DAYS</label>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-xs3">
+                                                <div class="output">
+                                                    <span id="hours">00</span>
+                                                    <label>HOURS</label>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-xs3">
+                                                <div class="output">
+                                                    <span id="minutes">00</span>
+                                                    <label>MINUTES</label>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-xs3">
+                                                <div class="output">
+                                                    <span id="seconds">00</span>
+                                                    <label>SECOND</label>
+                                                </div>
+                                            </div>
+                                            <div class="layui-col-xs12 title">
+                                                <span>服务运行时间</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-col-xs1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4">
+                        <div class="layui-card">
+                            <div class="layui-card-header">服务器当前时间（TIME ON SERVER）</div>
+                            <div class="layui-card-body">
+                                <div class="box-inner-wrapper">
+                                    <span id="current">TIME ON SERVER</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4">
+                        <div class="layui-card">
+                            <div class="layui-card-header">服务启动日期（SERVER IS ACTIVE SINCE）</div>
+                            <div class="layui-card-body">
+                                <div class="box-inner-wrapper">
+                                    <span id="active">SERVER IS ACTIVE SINCE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <div class="layui-card">
+                            <div class="layui-card-header">在线用户</div>
+                            <div class="layui-card-body">
+                                <div id="notice_user" class="layui-row layui-col-space15"
+                                    style="height: 400px;overflow: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs9">
+                        <div class="layui-card">
+                            <div class="layui-card-header">服务器监控（SERVER MONITOR）</div>
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-col-space15" style="height: 400px;">
+                                    <div class="layui-col-xs5 layui-col-md-offset1" style="text-align: center;">
+                                        <div id="processor_chart" style="height: 320px; width: 100%;">
+                                        </div>
+                                        <button id="processor_btn" class="layui-btn layui-btn-fluid"></button>
+                                    </div>
+                                    <div class="layui-col-xs5" style="text-align: center;">
+                                        <div id="memory_chart" style="height: 320px; width: 100%;">
+                                        </div>
+                                        <div class="layui-btn-group">
+                                            <button id="used_mem"
+                                                class="layui-btn layui-btn-normal">已用内存：0.00GB</button>
+                                            <button id="free_mem"
+                                                class="layui-btn layui-btn-normal">可用内存：0.00GB</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs4">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">服务器信息（SERVER INFO）</div>
+                            <div id="system_container" class="layui-card-body">
+                                <script id="system" type="text/html">
+                                    <table class="layui-table">
+                                        <colgroup><col width="270"><col></colgroup>
+                                        <tbody>
+                                            <tr><td align="right">服务器操作系统（PLATFORM）</td><td>{{ d.os.platform }}</td></tr>
+                                            <tr><td align="right">操作系统版本（RELEASE）</td><td>{{ d.os.release }}</td></tr>
+                                            <tr><td align="right">处理器CPU（PROCESSOR）</td><td>{{ d.processor }}</td></tr>
+                                            <tr><td align="right">操作系统类型（ARCHITECTURE）</td><td>{{ d.architecture }}</td></tr>
+                                            <tr><td align="right">系统运行内存（TOTAL MEMORY）</td><td>{{ d.total_mem }}</td></tr>
+                                        </tbody>
+                                    </table>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">网络信息（NETWORK）</div>
+                            <div id="network_container" class="layui-card-body">
+                                <script id="network" type="text/html">
+                                    <table class="layui-table">
+                                        <colgroup><col width="270"><col></colgroup>
+                                        <tbody>
+                                            <tr><td align="right">服务器主机名（HOSTNAME）</td><td>{{ d.hostname }}</td></tr>
+                                            <tr><td align="right">内网地址IP（LOCAL IP）</td><td>{{ d.local_ip }}</td></tr>
+                                            <tr><td align="right">外网地址IP（PUBLIC IP）</td><td>{{ d.public_ip }}</td></tr>
+                                            <tr><td align="right">子网掩码（NETWORK MASK）</td><td>{{ d.network_mask }}</td></tr>
+                                            <tr><td align="right">MAC地址（MAC）</td><td>{{ d.mac }}</td></tr>
+                                        </tbody>
+                                    </table>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">数据库连接（DATABASE）</div>
+                            <div id="database_container" class="layui-card-body">
+                                <script id="database" type="text/html">
+                                    <table class="layui-table">
+                                        <colgroup><col><col></colgroup>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

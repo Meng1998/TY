@@ -1,0 +1,10 @@
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\bin\x86\Release\CsharpDemo.exe.config
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\bin\x86\Release\CsharpDemo.exe
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\bin\x86\Release\CsharpDemo.pdb
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.csprojAssemblyReference.cache
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.Form1.resources
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.Properties.Resources.resources
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.csproj.GenerateResource.cache
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.csproj.CoreCompileInputs.cache
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.exe
+C:\Users\15907\Desktop\GAdemo\CZapi\demo\CsharpDemo\CsharpDemo\obj\Debug\CsharpDemo.pdb

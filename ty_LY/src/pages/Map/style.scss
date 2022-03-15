@@ -1,0 +1,85 @@
+#mapvision3d{
+    position: fixed;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+#mapvision3d video{
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.facemin{
+    position: fixed;
+    bottom: 100px;
+    left:300px;
+    width: 505px;
+    height: 200px;
+    border: 1px solid rgb(51,82,132);
+    z-index: 2;
+    .CompletedSmart-Tab{
+        // width: 448px;
+        width: 90%;
+        height: 320px;
+        margin: 10px auto;
+        overflow: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar{width:3px;height:5px;border-radius: 5px;}
+        &::-webkit-scrollbar-track{background-color: transparent;border-radius: 5px;height: 260px;}
+        &::-webkit-scrollbar-thumb{background: #081932;border-radius: 5px;}
+        &::-webkit-scrollbar-thumb:hover{background: #081932;}
+        li{ 
+            height: 25px;
+            line-height: 25px;
+            background-color: rgba(145, 147, 150,0.2);
+            margin-bottom: 3px;
+            display: flex;
+            span{
+              width: 33%;
+              color: white;
+              white-space: nowrap;overflow: hidden;
+             text-align: center;
+            }
+            // span:nth-child(2){
+            //     width: 80%;
+            //       text-align: center;
+            //   }
+        }
+        .Cljbj{
+            color: blue;
+        }
+        .Tab-Th{
+            background-color: rgb(145, 147, 150);
+        }
+    }
+    .faceminclose{
+        color: white;
+        float: right;
+        margin-right: 10PX;
+        margin-top: 5px;
+    }
+}
+.mmglj{
+    position: fixed;
+    top: 200px;
+    left: 930px;
+    color: rgb(51,82,132);
+    border: 1px solid rgb(51,82,132);
+    width: 400px;
+    height: 500px;
+    span{
+        display: block;
+        float: right;
+        margin-right: 10PX;
+    }
+    img{
+        
+        width: 100%;
+        height: 479px;
+    }
+}

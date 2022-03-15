@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>跟进项目</title>
+    <script type="text/javascript" src="../../../lib/include-lib.js?version=202102150234" libpath="../../../" include="layui"></script>
+    <link rel="stylesheet" href="../../../style/admin.css?version=202102150234" media="all">
+    <script type="text/javascript" src="../../../js/base.js?version=202102150234"></script>
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <form class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-search-label">项目名称</label>
+                            <div class="layui-input-inline">
+                                <input name="project_name" placeholder="请输入项目名称" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">客户名称</label>
+                            <div class="layui-input-inline">
+                                <input name="custom_name" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">客户联系人</label>
+                            <div class="layui-input-inline">
+                                <input name="contacts_name" placeholder="请输入客户联系人" autocomplete="off"
+                                    class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-search-label">项目经理</label>
+                            <div class="layui-input-inline">
+                                <input name="person_name" placeholder="请输入项目经理" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn" lay-submit lay-filter="LAY-project-search">搜索</button>
+                            <button class="layui-btn" type="reset" lay-submit lay-filter="LAY-project-reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+                <table id="LAY-project-manage" lay-filter="LAY-project-manage"></table>
+                <script type="text/html" id="toolbar">
+                    <div class="layui-btn-container">
+                        <button class="layui-btn layui-btn-sm layui-btn-primary" lay-event="person">分配人员</button>
+                        <button class="layui-btn layui-btn-sm layui-btn-info" lay-event="transfer">项目移交</button>
+                        <button class="layui-btn layui-btn-sm layui-btn-checked" lay-event="finish">完成项目</button>
+                        <button class="layui-btn layui-btn-sm layui-btn-warm" lay-event="edit">编辑信息</button>
+                    </div>
+                </script>
+                <script type="text/html" id="emphasis-tool">
+                    <input type="checkbox" lay-filter="emphasis" lay-skin="switch" lay-text="开启|关闭" value="{{ d.id }}" {{d.emphasis === 1 ? "checked" : ""}}>
+                </script>
+                <script type="text/html" id="tool">
+                    {{# if(d.person_name){ }}
+                        <button class="layui-btn layui-btn-xs layui-btn-info" lay-event="transfer">项目移交</button>
+                    {{# } else { }}
+                        <button class="layui-btn layui-btn-xs layui-btn-primary" lay-event="person">分配人员</button>
+                    {{# } }}
+                    <button class="layui-btn layui-btn-xs layui-btn-checked" lay-event="finish">完成</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">编辑</button>
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

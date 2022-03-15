@@ -1,0 +1,6 @@
+2021-11-23 11:10:06.652 INFO VideoSDK [0x0000a4c0] [d:\delivery\projects\cd20192183530\source_project\videosdk\sdk\videosdk\videosdk\MultiStreamPlay.h-80] maxReuseNum = 50, durationToDelInstance = 600
+2021-11-23 11:10:06.652 INFO VideoSDK [0x0000a4c0] [OperSDK.cpp-73] VideoSDK init success
+2021-11-23 11:10:13.523 INFO VideoSDK [0x0000a4c0] [OperSDK.cpp-129] VideoSDK uninit success
+2022-01-04 16:04:36.089 INFO VideoSDK [0x00003920] [d:\delivery\projects\cd20192183530\source_project\videosdk\sdk\videosdk\videosdk\MultiStreamPlay.h-80] maxReuseNum = 50, durationToDelInstance = 600
+2022-01-04 16:04:36.089 INFO VideoSDK [0x00003920] [OperSDK.cpp-73] VideoSDK init success
+2022-01-04 16:04:38.394 INFO VideoSDK [0x00003920] [OperSDK.cpp-129] VideoSDK uninit success
